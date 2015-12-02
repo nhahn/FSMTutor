@@ -30,7 +30,7 @@ var frozen = false;
 var force = d3.layout.force()
     .nodes(nodes)
     .links(links)
-    .linkDistance(150)
+    .linkDistance(200)
     .charge(-500)
     .on('tick', tick)
 
@@ -57,6 +57,8 @@ svg.append('svg:defs').append('svg:marker')
     .attr('d', 'M10,-5L0,0L10,5')
     .attr('fill', '#000');
 
+var radius = 15;
+
 // line displayed when dragging new nodes
 var drag_line = svg.append('svg:path')
   .attr('class', 'link dragline hidden')
@@ -65,6 +67,9 @@ var drag_line = svg.append('svg:path')
 // handles to link and node element groups
 var path = svg.append('svg:g').selectAll('path'),
     circle = svg.append('svg:g').selectAll('g');
+    linktext_event = svg.append("svg:g").selectAll("g.linklabelholder");
+    linktext_action = svg.append("svg:g").selectAll("g.linklabelholder");
+
 
 // mouse event vars
 var selected_node = null,
@@ -86,17 +91,18 @@ function tick() {
     var deltaX = d.target.x - d.source.x,
         deltaY = d.target.y - d.source.y,
         dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
+        diff = deltaX - deltaY,
         normX = deltaX / dist,
         normY = deltaY / dist,
-        sourcePadding = 12,
-        targetPadding = 17,
-        sourceX = d.source.x + (sourcePadding * normX),
-        sourceY = d.source.y + (sourcePadding * normY),
-        targetX = d.target.x - (targetPadding * normX),
-        targetY = d.target.y - (targetPadding * normY),
-        dr = Math.sqrt(deltaX * deltaX + deltaY * deltaY); //this is how we add in our line curves
+        sourcePadding = radius,
+        targetPadding = radius + 5,
+        offsetPadding = 9,
+        sourceX = d.source.x + (sourcePadding * normX) + (offsetPadding * normY),
+        sourceY = d.source.y + (sourcePadding * normY) - (offsetPadding * normX),
+        targetX = d.target.x - (targetPadding * normX) + (offsetPadding * normY),
+        targetY = d.target.y - (targetPadding * normY) - (offsetPadding * normX); //this is how we add in our line curves
     return 'M' + sourceX + ',' + sourceY + "A" + 
-            dr + "," + dr + " 0 0,1 " + targetX + ',' + targetY;
+            dist + "," + dist + " 0 0,1 " + targetX + ',' + targetY;
   });
 
   circle.attr('transform', function(d) {
@@ -120,6 +126,7 @@ function restart() {
     .attr('class', 'link')
     .classed('selected', function(d) { return d === selected_link; })
     .style('marker-start', function(d) { return ''; })
+    .attr("id",function(d,i) { return "linkId_" + i; })
     .style('marker-end', function(d) { return 'url(#end-arrow)'; })
 //    .on('mousedown', function(d) {
 //      if(d3.event.ctrlKey) return;
@@ -133,6 +140,7 @@ function restart() {
 //    })
     .on('mousedown', function(d) {
       //This is when we add a model to assign an event
+      if(frozen) return;
       d3.event.stopPropagation();
       $("#transitionEvent").html("Event <div class='CTATComboBox'></div>")
       var event = $("#transitionEvent div")
@@ -148,7 +156,7 @@ function restart() {
       var action = $("#transitionAction div")
       action.attr("id", "actionFrom"+d.source.id+"To"+d.target.id);
       action.append($("<option></option>").attr("value", "").text("Select an Action"));
-      $.each(['highlightButton', 'noAction', 'performButtonAction'], function(key, value) {   
+      $.each(['highlightButton', 'noAction', 'performButtonAction', 'unhighlightButton', 'depressedButton', 'undepressedButton'], function(key, value) {   
         action.append($("<option></option>")
          .attr("value",value)
          .text(value)); 
@@ -157,19 +165,39 @@ function restart() {
       $('#transitionModal').foundation('open');
     });
 
-  function addCTATElement(elem) {
-      var $ctat_component$$ = new CTAT.ComponentRegistry["CTATComboBox"];
-      console.log("Attaching CTAT tutoring to " + $(elem).attr("id"));
-      $(elem).attr("id") ? $ctat_component$$.setName($(elem).attr("id")) : (elem.id = CTATGlobalFunctions.div_id(), $ctat_component$$.setName(elem.id));
-      $ctat_component$$.setDivWrapper(elem);
-      $ctat_component$$.processAttributes();
-      $ctat_component$$.init();
-      $(elem).data("CTATComponent", $ctat_component$$);
-  }
+  linktext_event = linktext_event.data(force.links().filter(function(d) { return d.event}));
+     linktext_event.enter().append("g").attr("class", "linklabelholder")
+     .append("text")
+     .attr("class", "linklabel")
+	 .style("font-size", "13px")
+     .attr("dx",5)
+     .attr("dy",-5)
+     .attr("text-anchor", "start")
+	 .style("fill","#000")
+	 .append("textPath")
+     .attr("xlink:href",function(d,i) { return "#linkId_" + i;})
+     .text(function(d) { 
+	   return d.event; 
+     });
+  
+   linktext_action = linktext_action.data(force.links().filter(function(d) { return d.action}));
+     linktext_action.enter().append("g").attr("class", "linklabelholder")
+     .append("text")
+     .attr("class", "linklabel")
+	 .style("font-size", "13px")
+     .attr("dx",10)
+     .attr("dy",15)
+     .attr("text-anchor", "start")
+	 .style("fill","#000")
+	 .append("textPath")
+     .attr("xlink:href",function(d,i) { return "#linkId_" + i;})
+     .text(function(d) { 
+	   return d.action; 
+     });
+  
   
   // remove old links
   path.exit().remove();
-
 
   // circle (node) group
   // NB: the function arg is crucial here! nodes are known by id, not by index!
@@ -185,7 +213,7 @@ function restart() {
 
   g.append('svg:circle')
     .attr('class', 'node')
-    .attr('r', 12)
+    .attr('r', radius)
     .style('fill', function(d) { return (d === selected_node) ? d3.rgb(colors(d.id)).brighter().toString() : colors(d.id); })
     .style('stroke', function(d) { return d3.rgb(colors(d.id)).darker().toString(); })
     .classed('reflexive', function(d) { return d.reflexive; })
@@ -272,6 +300,17 @@ function restart() {
   force.start();
 }
 
+ function addCTATElement(elem) {
+      var $ctat_component$$ = new CTAT.ComponentRegistry["CTATComboBox"];
+      console.log("Attaching CTAT tutoring to " + $(elem).attr("id"));
+      $(elem).attr("id") ? $ctat_component$$.setName($(elem).attr("id")) : (elem.id = CTATGlobalFunctions.div_id(), $ctat_component$$.setName(elem.id));
+      $ctat_component$$.setDivWrapper(elem);
+      $ctat_component$$.processAttributes();
+      $ctat_component$$.init();
+      $(elem).data("CTATComponent", $ctat_component$$);
+  }
+  
+
 function findLink (source, target) {
   return links.filter(function(l) {
     return (l.source === source && l.target === target);
@@ -280,7 +319,7 @@ function findLink (source, target) {
 
 function findLinkById (source, target) {
   return links.filter(function(l) {
-    return (l.source.id === source && l.target.id === target);
+    return (l.source.id == source && l.target.id == target);
   })[0];
 }
 
@@ -368,35 +407,9 @@ function keydown() {
       } else if(selected_link) {
         links.splice(links.indexOf(selected_link), 1);
       }
+      clearFrozen();
       selected_link = null;
       selected_node = null;
-      restart();
-      break;
-    case 66: // B
-      if(selected_link) {
-        // set link direction to both left and right
-        selected_link.left = true;
-        selected_link.right = true;
-      }
-      restart();
-      break;
-    case 76: // L
-      if(selected_link) {
-        // set link direction to left only
-        selected_link.left = true;
-        selected_link.right = false;
-      }
-      restart();
-      break;
-    case 82: // R
-      if(selected_node) {
-        // toggle node reflexivity
-        selected_node.reflexive = !selected_node.reflexive;
-      } else if(selected_link) {
-        // set link direction to right only
-        selected_link.left = false;
-        selected_link.right = true;
-      }
       restart();
       break;
   }
@@ -430,6 +443,34 @@ svg.on('mousedown', mousedown)
 d3.select(window)
   .on('keydown', keydown)
   .on('keyup', keyup);
+
+function gradingFix(selection, action, input) {
+  switch (action) {
+    case 'createState':
+      selected_node = nodes.filter(function(n) {
+        return (n.id == parseInt(selection.substring(5)));
+      })[0];
+      restart();
+      break;
+    case 'createTransition':
+      selected_link = findLinkById(parseInt(selection.substring(5)), parseInt(input.substring(5)));
+      restart();
+      break;
+  }
+}
+
+function processCorrect(selection, action, input) {
+  switch (action) {
+    case 'UpdateComboBox':
+      var match = /(action|event)From(\d+)To(\d+)/.exec(selection);
+      if (match != null) {
+        var link = findLinkById(parseInt(match[2]), parseInt(match[3]));
+        link[match[1]] = input;
+        restart();
+      }
+      break;
+  }
+}
 
 resize();
 d3.select(window).on("resize", resize);

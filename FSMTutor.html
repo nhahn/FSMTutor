@@ -51,6 +51,7 @@
 
       path.link.selected {
         stroke-dasharray: 10,2;
+        stroke: #F00;
       }
 
       path.link.dragline {
@@ -103,11 +104,10 @@
           commShell.assignGradingHandler(function(str, msg) {
             //NOTE they return the wrong string, so we have to use the msg :|
             if (msg.getGradeResult() == "incorrect") {
-              msg.getSelect();
-              msg.getAction();
-              msg.getInput();
+              gradingFix(msg.getSelection(), msg.getAction(), msg.getInput());
               console.log("incorrect!");
             } else {
+              processCorrect(msg.getSelection(), msg.getAction(), msg.getInput());
               clearFrozen();
               console.log("correct!");
             }
