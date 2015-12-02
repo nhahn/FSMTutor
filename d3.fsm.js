@@ -12,15 +12,19 @@ var svg = d3.select('#fsm')
 //  - reflexive edges are indicated on the node (as a bold black circle).
 //  - links are always source < target; edge directions are set by 'left' and 'right'.
 var nodes = [
-    {id: 0, reflexive: false},
-    {id: 1, reflexive: true },
-    {id: 2, reflexive: false}
+    {id: 0, reflexive: false}
+    //{id: 1, reflexive: true },
+    //{id: 2, reflexive: false}
   ],
-  lastNodeId = 2,
+  lastNodeId = 0,
   links = [
-    {source: nodes[0], target: nodes[1], left: false, right: true },
-    {source: nodes[1], target: nodes[2], left: false, right: true }
+    //{source: nodes[0], target: nodes[1], left: false, right: true },
+    //{source: nodes[1], target: nodes[2], left: false, right: true }
   ];
+
+//We set this variable to true when we are waiting for a response
+//from the CTAT service. It disables the event listeners
+var frozen = false;
 
 // init D3 force layout
 var force = d3.layout.force()
@@ -84,13 +88,15 @@ function tick() {
         dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
         normX = deltaX / dist,
         normY = deltaY / dist,
-        sourcePadding = d.left ? 17 : 12,
-        targetPadding = d.right ? 17 : 12,
+        sourcePadding = 12,
+        targetPadding = 17,
         sourceX = d.source.x + (sourcePadding * normX),
         sourceY = d.source.y + (sourcePadding * normY),
         targetX = d.target.x - (targetPadding * normX),
-        targetY = d.target.y - (targetPadding * normY);
-    return 'M' + sourceX + ',' + sourceY + 'L' + targetX + ',' + targetY;
+        targetY = d.target.y - (targetPadding * normY),
+        dr = Math.sqrt(deltaX * deltaX + deltaY * deltaY); //this is how we add in our line curves
+    return 'M' + sourceX + ',' + sourceY + "A" + 
+            dr + "," + dr + " 0 0,1 " + targetX + ',' + targetY;
   });
 
   circle.attr('transform', function(d) {
@@ -105,27 +111,62 @@ function restart() {
 
   // update existing links
   path.classed('selected', function(d) { return d === selected_link; })
-    .style('marker-start', function(d) { return d.left ? 'url(#start-arrow)' : ''; })
-    .style('marker-end', function(d) { return d.right ? 'url(#end-arrow)' : ''; });
+    .style('marker-start', function(d) { return ''; })
+    .style('marker-end', function(d) { return 'url(#end-arrow)'; });
 
 
   // add new links
   path.enter().append('svg:path')
     .attr('class', 'link')
     .classed('selected', function(d) { return d === selected_link; })
-    .style('marker-start', function(d) { return d.left ? 'url(#start-arrow)' : ''; })
-    .style('marker-end', function(d) { return d.right ? 'url(#end-arrow)' : ''; })
+    .style('marker-start', function(d) { return ''; })
+    .style('marker-end', function(d) { return 'url(#end-arrow)'; })
+//    .on('mousedown', function(d) {
+//      if(d3.event.ctrlKey) return;
+//      //TODO disable this -- we don't want them selecting random links
+//      // select link
+//      mousedown_link = d;
+//      if(mousedown_link === selected_link) selected_link = null;
+//      else selected_link = mousedown_link;
+//      selected_node = null;
+//      restart();
+//    })
     .on('mousedown', function(d) {
-      if(d3.event.ctrlKey) return;
-
-      // select link
-      mousedown_link = d;
-      if(mousedown_link === selected_link) selected_link = null;
-      else selected_link = mousedown_link;
-      selected_node = null;
-      restart();
+      //This is when we add a model to assign an event
+      d3.event.stopPropagation();
+      $("#transitionEvent").html("Event <div class='CTATComboBox'></div>")
+      var event = $("#transitionEvent div")
+      event.attr("id", "eventFrom"+d.source.id+"To"+d.target.id);
+      event.append($("<option></option>").attr("value", "").text("Select an Event"));
+      $.each(['mouseDown', 'mouseUp', 'mouseMoveOutside', 'mouseMoveInside'], function(key, value) {   
+        event.append($("<option></option>")
+         .attr("value",value)
+         .text(value)); 
+      });
+      addCTATElement(event[0]);
+      $("#transitionAction").html("Action <div class='CTATComboBox'></div>")
+      var action = $("#transitionAction div")
+      action.attr("id", "actionFrom"+d.source.id+"To"+d.target.id);
+      action.append($("<option></option>").attr("value", "").text("Select an Action"));
+      $.each(['highlightButton', 'noAction', 'performButtonAction'], function(key, value) {   
+        action.append($("<option></option>")
+         .attr("value",value)
+         .text(value)); 
+      });
+      addCTATElement(action[0]);
+      $('#transitionModal').foundation('open');
     });
 
+  function addCTATElement(elem) {
+      var $ctat_component$$ = new CTAT.ComponentRegistry["CTATComboBox"];
+      console.log("Attaching CTAT tutoring to " + $(elem).attr("id"));
+      $(elem).attr("id") ? $ctat_component$$.setName($(elem).attr("id")) : (elem.id = CTATGlobalFunctions.div_id(), $ctat_component$$.setName(elem.id));
+      $ctat_component$$.setDivWrapper(elem);
+      $ctat_component$$.processAttributes();
+      $ctat_component$$.init();
+      $(elem).data("CTATComponent", $ctat_component$$);
+  }
+  
   // remove old links
   path.exit().remove();
 
@@ -160,6 +201,7 @@ function restart() {
     })
     .on('mousedown', function(d) {
       if(d3.event.ctrlKey) return;
+      if(frozen) return;
 
       // select node
       mousedown_node = d;
@@ -177,6 +219,7 @@ function restart() {
     })
     .on('mouseup', function(d) {
       if(!mousedown_node) return;
+      if(frozen) return;
 
       // needed by FF
       drag_line
@@ -185,7 +228,8 @@ function restart() {
 
       // check for drag-to-self
       mouseup_node = d;
-      if(mouseup_node === mousedown_node) { resetMouseVars(); return; }
+      if(mouseup_node === mousedown_node) { resetMouseVars(); return; } 
+      //TODO this is a self-referencing state -- support this
 
       // unenlarge target node
       d3.select(this).attr('transform', '');
@@ -193,23 +237,15 @@ function restart() {
       // add link to graph (update if exists)
       // NB: links are strictly source < target; arrows separately specified by booleans
       var source, target, direction;
-      if(mousedown_node.id < mouseup_node.id) {
-        source = mousedown_node;
-        target = mouseup_node;
-        direction = 'right';
-      } else {
-        source = mouseup_node;
-        target = mousedown_node;
-        direction = 'left';
-      }
+      source = mousedown_node;
+      target = mouseup_node;
+      direction = 'right';
 
       var link;
-      link = links.filter(function(l) {
-        return (l.source === source && l.target === target);
-      })[0];
+      link = findLink(source, target);
 
       if(link) {
-        link[direction] = true;
+        //Something?
       } else {
         link = {source: source, target: target, left: false, right: false};
         link[direction] = true;
@@ -217,8 +253,8 @@ function restart() {
       }
 
       // select new link
-      selected_link = link;
       selected_node = null;
+      sendMessage("State"+source.id, "createTransition", "State"+target.id)
       restart();
     });
 
@@ -236,6 +272,18 @@ function restart() {
   force.start();
 }
 
+function findLink (source, target) {
+  return links.filter(function(l) {
+    return (l.source === source && l.target === target);
+  })[0];
+}
+
+function findLinkById (source, target) {
+  return links.filter(function(l) {
+    return (l.source.id === source && l.target.id === target);
+  })[0];
+}
+
 function mousedown() {
   // prevent I-bar on drag
   //d3.event.preventDefault();
@@ -244,6 +292,7 @@ function mousedown() {
   svg.classed('active', true);
 
   if(d3.event.ctrlKey || mousedown_node || mousedown_link) return;
+  if(frozen) return;
 
   // insert new node at point
   var point = d3.mouse(this),
@@ -251,12 +300,16 @@ function mousedown() {
   node.x = point[0];
   node.y = point[1];
   nodes.push(node);
-
+  
   restart();
+  // @FSMTutor this is where we send our command
+  // for a new node
+  sendMessage("State"+lastNodeId, "createState", "createState");
 }
 
 function mousemove() {
   if(!mousedown_node) return;
+  if(frozen) return;
 
   // update drag line
   drag_line.attr('d', 'M' + mousedown_node.x + ',' + mousedown_node.y + 'L' + d3.mouse(this)[0] + ',' + d3.mouse(this)[1]);
@@ -265,6 +318,8 @@ function mousemove() {
 }
 
 function mouseup() {
+  if(frozen) return;
+
   if(mousedown_node) {
     // hide drag line
     drag_line
@@ -357,6 +412,15 @@ function keyup() {
       .on('touchstart.drag', null);
     svg.classed('ctrl', false);
   }
+}
+
+function sendMessage(selection, action, input) {
+  frozen = true;
+  commShell.gradeSAI(selection, action, input);
+}
+
+function clearFrozen() {
+  frozen = false;
 }
 
 // app starts here

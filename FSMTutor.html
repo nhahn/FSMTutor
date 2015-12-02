@@ -8,12 +8,13 @@
     <meta name="keywords" content="">
     <title>Fraction Addition</title>
 
-    <link rel="stylesheet" href="vendor/foundation-sites/dist/foundation.min.css"></script>
+    <link rel="stylesheet" href="vendor/foundation-sites/dist/foundation.min.css"/>
     <link rel="stylesheet" href="CTAT.css"/>
 
     <style type="text/css">
       .CTAT-text { font-size: 20px; font-family: Arial; text-align: center;}
       .misc-text { font-size: 20px; font-family: Arial}
+      .CTATComboBox { width: 100%;}
       .CTAT-done-button {
         -webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
         -moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
@@ -99,6 +100,18 @@
       $(function() 
       {
         initTutor(tutorConfiguration);
+          commShell.assignGradingHandler(function(str, msg) {
+            //NOTE they return the wrong string, so we have to use the msg :|
+            if (msg.getGradeResult() == "incorrect") {
+              msg.getSelect();
+              msg.getAction();
+              msg.getInput();
+              console.log("incorrect!");
+            } else {
+              clearFrozen();
+              console.log("correct!");
+            }
+          });
       });
     </script>
   </head>
@@ -118,7 +131,9 @@
         <div class="medium-4 columns">
           For this problem, you will be trying to model the FSM of a button interactor. A button is provided below for you to test with.
           <br/><br/>
-          <button class="button" type="button">Test Button</button>
+          <button id="testButton" class="button" type="button">Test Button</button>
+          <span id="testOutput"></span>
+          <script>$("#testButton").click(function() { $("#testOutput").text("Button Pressed!"); })</script>
         </div>
         <div class="medium-8 columns">
           <div id="fsm"></div>
@@ -138,6 +153,26 @@
           <a href="http://ctat.pact.cs.cmu.edu/">
           <img alt="CTAT: Cognitive Tutor Authoring Tools" style="width:330px; margin-left: 10px; margin-top: 20px;" src="CTAT_Banner.svg"/></a>
       </div>
+    </div>
+    <div id="transitionModal" class="small reveal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+      <h3 id="modalTitle">Transition Information</h3>
+      <form>
+        <div class="row">
+            <div class="medium-6 columns">
+            <label id="transitionEvent">
+            </label>
+          </div>
+        </div>
+        <div class="row">
+            <div class="medium-6 columns">
+            <label id="transitionAction">
+            </label>
+          </div>
+        </div>
+      </form>
+      <button class="close-button" data-close aria-label="Close reveal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     <script>
       $(document).foundation();
