@@ -1,0 +1,25 @@
+{
+  "name": "FSMTutor",
+  "version": "0.0.1",
+  "authors": [
+    "Nathan Hahn <nhahn@andrew.cmu.edu>"
+  ],
+  "description": "A tutor to help student model UI components with FSMs",
+  "main": "FSMTutor.html",
+  "keywords": [
+    "CogTutor",
+    "CTAT"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "~3.5.10",
+    "foundation-sites": "~6.0.4"
+  }
+}
