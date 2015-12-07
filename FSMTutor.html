@@ -101,17 +101,18 @@
       $(function() 
       {
         initTutor(tutorConfiguration);
-          commShell.assignGradingHandler(function(str, msg) {
-            //NOTE they return the wrong string, so we have to use the msg :|
-            if (msg.getGradeResult() == "incorrect") {
-              gradingFix(msg.getSelection(), msg.getAction(), msg.getInput());
-              console.log("incorrect!");
-            } else {
-              processCorrect(msg.getSelection(), msg.getAction(), msg.getInput());
-              clearFrozen();
-              console.log("correct!");
-            }
-          });
+        commShell.assignGradingHandler(function(str, msg) {
+          //NOTE they return the wrong string, so we have to use the msg :|
+          if (msg.getGradeResult() == "incorrect") {
+            gradingFix(msg.getSelection(), msg.getAction(), msg.getInput());
+            console.log("incorrect!");
+          } else {
+            processCorrect(msg.getSelection(), msg.getAction(), msg.getInput());
+            clearFrozen();
+            console.log("correct!");
+          }
+        });
+        commShell.highlightHandler(highlightHandler);
       });
     </script>
   </head>
@@ -129,11 +130,13 @@
     <div id="container">
       <div class="row">
         <div class="medium-4 columns">
-          For this problem, you will be trying to model the FSM of a button interactor. A button is provided below for you to test with.
-          <br/><br/>
+          <p>For this problem, you will be trying to model the FSM of a button interactor. A button is provided below for you to test with.</p>
           <button id="testButton" class="button" type="button">Test Button</button>
-          <span id="testOutput"></span>
-          <script>$("#testButton").click(function() { $("#testOutput").text("Button Pressed!"); })</script>
+          <span id="testOutput" style="display: none">Button Pressed!</span>
+          <script>$("#testButton").click(function() { $("#testOutput").show().delay(1000).fadeOut() })</script>
+          <p>
+            Use the graphing tool on the right to enter your FSM. You can create nodes by clicking anywhere on the canvas without a link or node. Links between nodes are created by dragging and dropping links between them. To enter an event and action for a link, click on the link and a popup will appear. 
+          </p>
         </div>
         <div class="medium-8 columns">
           <div id="fsm"></div>

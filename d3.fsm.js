@@ -31,7 +31,7 @@ var force = d3.layout.force()
     .nodes(nodes)
     .links(links)
     .linkDistance(200)
-    .charge(-500)
+    .charge(-1500)
     .on('tick', tick)
 
 // define arrow markers for graph links
@@ -57,7 +57,7 @@ svg.append('svg:defs').append('svg:marker')
     .attr('d', 'M10,-5L0,0L10,5')
     .attr('fill', '#000');
 
-var radius = 15;
+var radius = 20; //Set the side of our nodes
 
 // line displayed when dragging new nodes
 var drag_line = svg.append('svg:path')
@@ -72,16 +72,18 @@ var path = svg.append('svg:g').selectAll('path'),
 
 
 // mouse event vars
-var selected_node = null,
-    selected_link = null,
+var selected_node = null, //This is set if we have a node in error
+    selected_link = null, //This is set if we have a link in error
     mousedown_link = null,
     mousedown_node = null,
+    hover_node = null, //To check which node we are hovering over
     mouseup_node = null;
 
 function resetMouseVars() {
   mousedown_node = null;
   mouseup_node = null;
   mousedown_link = null;
+  hover_node = null;
 }
 
 // update force layout (called automatically each iteration)
@@ -101,8 +103,21 @@ function tick() {
         sourceY = d.source.y + (sourcePadding * normY) - (offsetPadding * normX),
         targetX = d.target.x - (targetPadding * normX) + (offsetPadding * normY),
         targetY = d.target.y - (targetPadding * normY) - (offsetPadding * normX); //this is how we add in our line curves
+    
+    if (d.target == d.source) {
+       var sweep = 1;
+       var largeArc = 1;
+       var xRotation = 60;
+       sourceX = d.source.x + radius * .45;
+       sourceY = d.source.y + radius * .65;
+       targetX = d.source.x - ((radius + 5) * .45);
+       targetY = d.source.y - ((radius + 5) * .65);
+       return "M" + sourceX + "," + sourceY + "A" + 30 + "," + (-25) + " " + xRotation + "," + largeArc + "," + sweep + " " + targetX + "," + targetY; 
+    } 
+    
     return 'M' + sourceX + ',' + sourceY + "A" + 
             dist + "," + dist + " 0 0,1 " + targetX + ',' + targetY;
+    //TODO deal with flipping this
   });
 
   circle.attr('transform', function(d) {
@@ -140,8 +155,9 @@ function restart() {
 //    })
     .on('mousedown', function(d) {
       //This is when we add a model to assign an event
-      if(frozen) return;
       d3.event.stopPropagation();
+      if(frozen) return;
+      if (d.event || d.action) return;
       $("#transitionEvent").html("Event <div class='CTATComboBox'></div>")
       var event = $("#transitionEvent div")
       event.attr("id", "eventFrom"+d.source.id+"To"+d.target.id);
@@ -179,6 +195,7 @@ function restart() {
      .text(function(d) { 
 	   return d.event; 
      });
+    //TODO maybe rotate text here?
   
    linktext_action = linktext_action.data(force.links().filter(function(d) { return d.action}));
      linktext_action.enter().append("g").attr("class", "linklabelholder")
@@ -206,6 +223,7 @@ function restart() {
   // update existing nodes (reflexive & selected visual states)
   circle.selectAll('circle')
     .style('fill', function(d) { return (d === selected_node) ? d3.rgb(colors(d.id)).brighter().toString() : colors(d.id); })
+    .style('stroke', function(d) { return (d === selected_node) ? '#F00' : d3.rgb(colors(d.id)).darker().toString(); })
     .classed('reflexive', function(d) { return d.reflexive; });
 
   // add new nodes
@@ -218,13 +236,15 @@ function restart() {
     .style('stroke', function(d) { return d3.rgb(colors(d.id)).darker().toString(); })
     .classed('reflexive', function(d) { return d.reflexive; })
     .on('mouseover', function(d) {
-      if(!mousedown_node || d === mousedown_node) return;
+      if(!mousedown_node) return;
       // enlarge target node
+      hover_node = d;
       d3.select(this).attr('transform', 'scale(1.1)');
     })
     .on('mouseout', function(d) {
-      if(!mousedown_node || d === mousedown_node) return;
+      if(!mousedown_node) return;
       // unenlarge target node
+      hover_node = null;
       d3.select(this).attr('transform', '');
     })
     .on('mousedown', function(d) {
@@ -233,9 +253,6 @@ function restart() {
 
       // select node
       mousedown_node = d;
-      if(mousedown_node === selected_node) selected_node = null;
-      else selected_node = mousedown_node;
-      selected_link = null;
 
       // reposition drag line
       drag_line
@@ -256,7 +273,7 @@ function restart() {
 
       // check for drag-to-self
       mouseup_node = d;
-      if(mouseup_node === mousedown_node) { resetMouseVars(); return; } 
+      //if(mouseup_node === mousedown_node) { resetMouseVars(); return; } 
       //TODO this is a self-referencing state -- support this
 
       // unenlarge target node
@@ -273,7 +290,8 @@ function restart() {
       link = findLink(source, target);
 
       if(link) {
-        //Something?
+        resetMouseVars();
+        return;
       } else {
         link = {source: source, target: target, left: false, right: false};
         link[direction] = true;
@@ -351,7 +369,18 @@ function mousemove() {
   if(frozen) return;
 
   // update drag line
-  drag_line.attr('d', 'M' + mousedown_node.x + ',' + mousedown_node.y + 'L' + d3.mouse(this)[0] + ',' + d3.mouse(this)[1]);
+  //TODO change dragline to be a self-referencing one in the case it is hovering over the same node
+  if (mousedown_node == hover_node) {
+    var sweep = 1;
+    var largeArc = 1;
+    var xRotation = 60;
+    sourceX = mousedown_node.x + radius * .45;
+    sourceY = mousedown_node.y + radius * .65;
+    targetX = mousedown_node.x - ((radius + 5) * .45);
+    targetY = mousedown_node.y - ((radius + 5) * .65);
+    drag_line.attr('d', "M" + sourceX + "," + sourceY + "A" + 30 + "," + (-25) + " " + xRotation + "," + largeArc + "," + sweep + " " + targetX + "," + targetY);
+  } else 
+    drag_line.attr('d', 'M' + mousedown_node.x + ',' + mousedown_node.y + 'L' + d3.mouse(this)[0] + ',' + d3.mouse(this)[1]);
 
   restart();
 }
@@ -384,6 +413,10 @@ function spliceLinksForNode(node) {
 
 // only respond once per keydown
 var lastKeyDown = -1;
+var drag = force.drag()
+  .on("dragstart", function(d) {
+    d.fixed = true; 
+  });
 
 function keydown() {
   d3.event.preventDefault();
@@ -393,7 +426,7 @@ function keydown() {
 
   // ctrl
   if(d3.event.keyCode === 17) {
-    circle.call(force.drag);
+    circle.call(drag);
     svg.classed('ctrl', true);
   }
 
@@ -404,6 +437,7 @@ function keydown() {
       if(selected_node) {
         nodes.splice(nodes.indexOf(selected_node), 1);
         spliceLinksForNode(selected_node);
+        lastNodeId--; //We only delete on error (so it is safe to decriment this)
       } else if(selected_link) {
         links.splice(links.indexOf(selected_link), 1);
       }
@@ -470,6 +504,10 @@ function processCorrect(selection, action, input) {
       }
       break;
   }
+}
+
+function highlightHandler(highlight, message) {
+  console.log("Highlight: " + highlight + " " + message.getSelection() + " " + message.getAction() + " " + message.getInput());
 }
 
 resize();

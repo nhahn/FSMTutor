@@ -129,14 +129,6 @@
         </dimension>
     </node>
     <node locked="false" doneState="false">
-        <text>state18</text>
-        <uniqueID>19</uniqueID>
-        <dimension>
-            <x>242</x>
-            <y>1265</y>
-        </dimension>
-    </node>
-    <node locked="false" doneState="false">
         <text>state19</text>
         <uniqueID>20</uniqueID>
         <dimension>
@@ -754,10 +746,10 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>newState</value>
+                        <value>State3</value>
                     </Selection>
                     <Action>
-                        <value>ButtonPressed</value>
+                        <value>createState</value>
                     </Action>
                     <Input>
                         <value>-1</value>
@@ -776,19 +768,18 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">newState</matcherParameter>
+                        <matcherParameter name="single">State3</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">ButtonPressed</matcherParameter>
+                        <matcherParameter name="single">createState</matcherParameter>
                     </matcher>
                 </Action>
                 <Input>
                     <matcher>
-                        <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">-1</matcherParameter>
+                        <matcherType>AnyMatcher</matcherType>
                     </matcher>
                 </Input>
                 <Actor linkTriggered="false">Student</Actor>
@@ -820,7 +811,7 @@
                         <value>createTransition</value>
                     </Action>
                     <Input>
-                        <value>beginTransition</value>
+                        <value>State3</value>
                     </Input>
                     <transaction_id>T043994bc-73bf-405f-9184-357d9b00b525</transaction_id>
                 </properties>
@@ -848,7 +839,7 @@
                 <Input>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">beginTransition</matcherParameter>
+                        <matcherParameter name="single">State3</matcherParameter>
                     </matcher>
                 </Input>
                 <Actor linkTriggered="false">Student</Actor>
@@ -861,126 +852,6 @@
         </rule>
         <sourceID>17</sourceID>
         <destID>18</destID>
-        <traversalCount>0</traversalCount>
-    </edge>
-    <edge>
-        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
-            <studentHintRequest></studentHintRequest>
-            <stepSuccessfulCompletion></stepSuccessfulCompletion>
-            <stepStudentError></stepStudentError>
-            <uniqueID>49</uniqueID>
-            <message>
-                <verb>SendNoteProperty</verb>
-                <properties>
-                    <MessageType>CorrectAction</MessageType>
-                    <Selection>
-                        <value>State3</value>
-                    </Selection>
-                    <Action>
-                        <value>createTransition</value>
-                    </Action>
-                    <Input>
-                        <value>endTransition</value>
-                    </Input>
-                    <transaction_id>T043994bc-73bf-405f-9184-357d9b00b525</transaction_id>
-                </properties>
-            </message>
-            <buggyMessage>No, this is not correct.</buggyMessage>
-            <successMessage></successMessage>
-            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
-            <callbackFn></callbackFn>
-            <actionType>Correct Action</actionType>
-            <oldActionType>Correct Action</oldActionType>
-            <checkedStatus>Never Checked</checkedStatus>
-            <matchers Concatenation="true">
-                <Selection>
-                    <matcher>
-                        <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">State3</matcherParameter>
-                    </matcher>
-                </Selection>
-                <Action>
-                    <matcher>
-                        <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">createTransition</matcherParameter>
-                    </matcher>
-                </Action>
-                <Input>
-                    <matcher>
-                        <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">endTransition</matcherParameter>
-                    </matcher>
-                </Input>
-                <Actor linkTriggered="false">Student</Actor>
-            </matchers>
-        </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
-        <rule>
-            <text>unnamed</text>
-            <indicator>-1</indicator>
-        </rule>
-        <sourceID>18</sourceID>
-        <destID>19</destID>
-        <traversalCount>0</traversalCount>
-    </edge>
-    <edge>
-        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
-            <studentHintRequest></studentHintRequest>
-            <stepSuccessfulCompletion></stepSuccessfulCompletion>
-            <stepStudentError></stepStudentError>
-            <uniqueID>50</uniqueID>
-            <message>
-                <verb>SendNoteProperty</verb>
-                <properties>
-                    <MessageType>CorrectAction</MessageType>
-                    <Selection>
-                        <value>Transition4</value>
-                    </Selection>
-                    <Action>
-                        <value>modifyCondition</value>
-                    </Action>
-                    <Input>
-                        <value>mouseUpInsideButton</value>
-                    </Input>
-                    <transaction_id>T043994bc-73bf-405f-9184-357d9b00b525</transaction_id>
-                </properties>
-            </message>
-            <buggyMessage>No, this is not correct.</buggyMessage>
-            <successMessage></successMessage>
-            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
-            <callbackFn></callbackFn>
-            <actionType>Correct Action</actionType>
-            <oldActionType>Correct Action</oldActionType>
-            <checkedStatus>Never Checked</checkedStatus>
-            <matchers Concatenation="true">
-                <Selection>
-                    <matcher>
-                        <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">Transition4</matcherParameter>
-                    </matcher>
-                </Selection>
-                <Action>
-                    <matcher>
-                        <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">modifyCondition</matcherParameter>
-                    </matcher>
-                </Action>
-                <Input>
-                    <matcher>
-                        <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">mouseUpInsideButton</matcherParameter>
-                    </matcher>
-                </Input>
-                <Actor linkTriggered="false">Student</Actor>
-            </matchers>
-        </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
-        <rule>
-            <text>unnamed</text>
-            <indicator>-1</indicator>
-        </rule>
-        <sourceID>19</sourceID>
-        <destID>20</destID>
         <traversalCount>0</traversalCount>
     </edge>
     <edge>
@@ -2060,6 +1931,66 @@
         </rule>
         <sourceID>12</sourceID>
         <destID>14</destID>
+        <traversalCount>0</traversalCount>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>50</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>CorrectAction</MessageType>
+                    <Selection>
+                        <value>Transition4</value>
+                    </Selection>
+                    <Action>
+                        <value>modifyCondition</value>
+                    </Action>
+                    <Input>
+                        <value>mouseUpInsideButton</value>
+                    </Input>
+                    <transaction_id>T043994bc-73bf-405f-9184-357d9b00b525</transaction_id>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>Never Checked</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">Transition4</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">modifyCondition</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">mouseUpInsideButton</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>18</sourceID>
+        <destID>20</destID>
         <traversalCount>0</traversalCount>
     </edge>
     <EdgesGroups ordered="true">
