@@ -1,0 +1,112 @@
+(require* wmeTypes "wmeTypes.clp")
+
+
+;; -------------------------------------------------------------------------------------------
+
+(bind ?t0 (assert (transition
+            (prev-state 0)
+            (next-state 1)
+            (event mouseMoveInside)
+            (action highlightButton)
+            )))
+(bind ?t1 (assert (transition
+            (prev-state 1)
+            (next-state 0)
+            (event mouseMoveOutside)
+            (action unhighlightButton)
+            )))
+(bind ?t2 (assert (transition
+            (prev-state 1)
+            (next-state 2)
+            (event mouseDown)
+            (action depressedButton)
+            )))
+(bind ?t3 (assert (transition
+            (prev-state 2)
+            (next-state 3)
+            (event mouseUp)
+            (action performAction)
+            )))
+(bind ?t4 (assert (transition
+            (prev-state 2)
+            (next-state 4)
+            (event mouseMoveOutside)
+            (action undepressedButton)
+            )))
+(bind ?t5 (assert (transition
+            (prev-state 4)
+            (next-state 0)
+            (event mouseUp)
+            (action unhighlightButton)
+            )))
+(bind ?t6 (assert (transition
+            (prev-state 4)
+            (next-state 2)
+            (event mouseMoveInside)
+            (action depressedButton)
+            )))
+
+(bind ?sp0 (assert (state-pair
+            (student-state State0)
+            (real-state 0)
+            )))
+
+(bind ?sp1 (assert (state-pair
+            (student-state nil)
+            (real-state 1)
+            )))
+
+(bind ?sp2 (assert (state-pair
+            (student-state nil)
+            (real-state 2)
+            )))
+
+(bind ?sp3 (assert (state-pair
+            (student-state nil)
+            (real-state 3)
+            )))
+
+(bind ?sp4 (assert (state-pair
+            (student-state nil)
+            (real-state 4)
+            )))
+
+;; States
+(bind ?s0 (assert (interface-element (name State0)(value binded))))
+(bind ?s1 (assert (interface-element (name State1))))
+(bind ?s2 (assert (interface-element (name State2))))
+(bind ?s3 (assert (interface-element (name State3))))
+(bind ?s4 (assert (interface-element (name State4))))
+
+;;Events
+(bind ?e01 (assert (interface-element (name eventFrom0To1))))
+(bind ?e10 (assert (interface-element (name eventFrom1To0))))
+(bind ?e12 (assert (interface-element (name eventFrom1To2))))
+(bind ?e23 (assert (interface-element (name eventFrom2To3))))
+(bind ?e24 (assert (interface-element (name eventFrom2To4))))
+(bind ?e42 (assert (interface-element (name eventFrom4To2))))
+(bind ?e40 (assert (interface-element (name eventFrom4To0))))
+
+;;Actions
+(bind ?a01 (assert (interface-element (name actionFrom0To1))))
+(bind ?a10 (assert (interface-element (name actionFrom1To0))))
+(bind ?a12 (assert (interface-element (name actionFrom1To2))))
+(bind ?a23 (assert (interface-element (name actionFrom2To3))))
+(bind ?a24 (assert (interface-element (name actionFrom2To4))))
+(bind ?a42 (assert (interface-element (name actionFrom4To2))))
+(bind ?a40 (assert (interface-element (name actionFrom4To0))))
+
+(bind ?prob (assert (problem
+		    (name SimpleButton)
+		    (total-state 5)
+		    (count-state 1) ;Start with only start state
+            (end-state 3)
+            (curr-states State0)
+		    (ie-states ?s0 ?s1 ?s2 ?s3 ?s4)
+		    (ie-events ?e01 ?e10 ?e12 ?e23 ?e24 ?e42 ?e40)
+		    (ie-actions ?a01 ?a10 ?a12 ?a23 ?a24 ?a42 ?a40)
+    		)))
+
+
+
+

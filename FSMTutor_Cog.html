@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
+    <meta name="dcterms.created" content="Tue, 01 Sep 2015 15:55:08 GMT">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>Fraction Addition</title>
+
+    <link rel="stylesheet" href="vendor/foundation-sites/dist/foundation.min.css"/>
+    <link rel="stylesheet" href="CTAT.css"/>
+
+    <style type="text/css">
+      .CTAT-text { font-size: 20px; font-family: Arial; text-align: center;}
+      .misc-text { font-size: 20px; font-family: Arial}
+      .CTATComboBox { width: 100%;}
+      .CTAT-done-button {
+        -webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+        box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75); }
+      .CTAT-hint-button {
+        -webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+        box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75); }
+
+      svg {
+        background-color: #FFF;
+        cursor: default;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+      }
+
+      svg:not(.active):not(.ctrl) {
+        cursor: crosshair;
+      }
+
+      path.link {
+        fill: none;
+        stroke: #000;
+        stroke-width: 4px;
+        cursor: default;
+      }
+
+      svg:not(.active):not(.ctrl) path.link {
+        cursor: pointer;
+      }
+
+      path.link.selected {
+        stroke-dasharray: 10,2;
+        stroke: #F00;
+      }
+
+      path.link.dragline {
+        pointer-events: none;
+      }
+
+      path.link.hidden {
+        stroke-width: 0;
+      }
+
+      circle.node {
+        stroke-width: 1.5px;
+        cursor: pointer;
+      }
+
+      circle.node.reflexive {
+        stroke: #000 !important;
+        stroke-width: 2.5px;
+      }
+
+      text {
+        font: 12px sans-serif;
+        pointer-events: none;
+      }
+
+      text.id {
+        text-anchor: middle;
+        font-weight: bold;
+      }
+
+    </style>
+
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
+    <script src="vendor/foundation-sites/dist/foundation.min.js"></script>
+    <script src="vendor/d3/d3.min.js"></script>
+    <script src="ctat.min.js"></script>
+
+
+    <script>
+      var skills = '<Skills><Skill name="add-numerators" category="fraction-addition" label="Add Numerators" description="Add Numerators" pKnown="0.25" pLearn="0.2" pGuess="0.2" pSlip="0.1" opportunityCount="0" /><Skill name="convert-numerator" category="fraction-addition" label="Convert Numerator" description="Convert Numerator" pKnown="0.25" pLearn="0.2" pGuess="0.2" pSlip="0.1" opportunityCount="0" /><Skill name="copy-answer-denominator" category="fraction-addition" label="Copy Answer Denominator" description="Copy Answer Denominator" pKnown="0.25" pLearn="0.2" pGuess="0.2" pSlip="0.1" opportunityCount="0" /><Skill name="determine-lcd" category="fraction-addition" label="Determine Lcd" description="Determine Lcd" pKnown="0.25" pLearn="0.2" pGuess="0.2" pSlip="0.1" opportunityCount="0" /><Skill name="multiply-denominators" category="fraction-addition" label="Multiply Denominators" description="Multiply Denominators" pKnown="0.25" pLearn="0.2" pGuess="0.2" pSlip="0.1" opportunityCount="0" /></Skills>';
+      var tutorConfiguration = CTATGlobalFunctions.generateDefaultConfiguration ();
+      CTATGlobalFunctions.setTutorValue (tutorConfiguration,'question_file','http://localhost:8888/FSMTutor/FinalBRDs/SimpleButton1.brd');
+      CTATGlobalFunctions.setTutorValue (tutorConfiguration,'skills',skills);
+      CTATGlobalFunctions.setTutorValue (tutorConfiguration,'remoteSocketURL','localhost');
+      CTATGlobalFunctions.setTutorValue (tutorConfiguration,'remoteSocketPort','8081');
+      CTATGlobalFunctions.setTutorValue (tutorConfiguration,'tutoring_service_communication', 'http');
+      $(function() 
+      {
+        initTutor(tutorConfiguration);
+        commShell.assignGradingHandler(function(str, msg) {
+          //NOTE they return the wrong string, so we have to use the msg :|
+          if (msg.getGradeResult() == "incorrect") {
+            gradingFix(msg.getSelection(), msg.getAction(), msg.getInput());
+            console.log("incorrect!");
+          } else {
+            processCorrect(msg.getSelection(), msg.getAction(), msg.getInput());
+            clearFrozen();
+            console.log("correct!");
+          }
+        });
+        commShell.highlightHandler(highlightHandler);
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="top-bar">
+      <div class="row">
+        <div class="top-bar-left">
+          <ul class="menu">
+            <li class="menu-text">FSMTutor</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="row">
+        <div class="medium-4 columns">
+          <p>For this problem, you will be trying to model the FSM of a button interactor. A button is provided below for you to test with.</p>
+          <button id="testButton" class="button" type="button">Test Button</button>
+          <span id="testOutput" style="display: none">Button Pressed!</span>
+          <script>$("#testButton").click(function() { $("#testOutput").show().delay(1000).fadeOut() })</script>
+          <p>
+            Use the graphing tool on the right to enter your FSM. You can create nodes by clicking anywhere on the canvas without a link or node. Links between nodes are created by dragging and dropping links between them. To enter an event and action for a link, click on the link and a popup will appear. 
+          </p>
+        </div>
+        <div class="medium-8 columns">
+          <div id="fsm"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="medium-2 columns">
+            <div id="done" class="CTATDoneButton" tabindex="9" style="float: left; margin: 0 auto;"></div>
+            <div id="hint" class="CTATHintButton" tabindex="10" style="float: right; margin: 0 auto;"></div>
+        </div>
+        <div class="medium-4 columns">
+          <div id="HintWindow" class="CTATHintWindow" style="width: 100%;"></div>
+        </div>
+        <div class="medium-4 columns"> 
+          <div id="skills" class="CTATSkillWindow" style="width: 100%;"></div>
+        </div>
+          <a href="http://ctat.pact.cs.cmu.edu/">
+          <img alt="CTAT: Cognitive Tutor Authoring Tools" style="width:330px; margin-left: 10px; margin-top: 20px;" src="CTAT_Banner.svg"/></a>
+      </div>
+    </div>
+    <div id="transitionModal" class="small reveal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+      <h3 id="modalTitle">Transition Information</h3>
+      <form>
+        <div class="row">
+            <div class="medium-6 columns">
+            <label id="transitionEvent">
+            </label>
+          </div>
+        </div>
+        <div class="row">
+            <div class="medium-6 columns">
+            <label id="transitionAction">
+            </label>
+          </div>
+        </div>
+      </form>
+      <button class="close-button" data-close aria-label="Close reveal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <script>
+      $(document).foundation();
+    </script>
+    <script src="d3.fsm.js"></script>
+  </body>
+</html>

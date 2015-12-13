@@ -105,14 +105,27 @@ function tick() {
         targetY = d.target.y - (targetPadding * normY) - (offsetPadding * normX); //this is how we add in our line curves
     
     if (d.target == d.source) {
-       var sweep = 1;
-       var largeArc = 1;
-       var xRotation = 60;
-       sourceX = d.source.x + radius * .45;
-       sourceY = d.source.y + radius * .65;
-       targetX = d.source.x - ((radius + 5) * .45);
-       targetY = d.source.y - ((radius + 5) * .65);
-       return "M" + sourceX + "," + sourceY + "A" + 30 + "," + (-25) + " " + xRotation + "," + largeArc + "," + sweep + " " + targetX + "," + targetY; 
+       var angle = Math.atan2(svg.attr("height") / 2 - d.source.y, svg.attr("width") / 2 - d.source.x);
+       var length = 55;
+      
+       var sourceX = d.source.x + radius * Math.cos(angle + Math.PI * .5);
+       var sourceY = d.source.y + radius * Math.sin(angle + Math.PI * .5);
+       var targetX = d.source.x - ((radius + 3) * Math.cos(angle + Math.PI * .5));
+       var targetY = d.source.y - ((radius + 3) * Math.sin(angle + Math.PI * .5));
+       
+       var lPointX = sourceX - length * Math.cos(angle - Math.PI * .05);
+       var lPointY = sourceY - length * Math.sin(angle - Math.PI * .05);
+       var lCurveX = lPointX - 15 * Math.cos(angle - Math.PI * .55);
+       var lCurveY = lPointY - 15 * Math.sin(angle - Math.PI * .55);
+         
+       var rPointX = targetX - length * Math.cos(angle + Math.PI * .05);
+       var rPointY = targetY - length * Math.sin(angle + Math.PI * .05);
+       var rCurveX = rPointX - 15 * Math.cos(angle + Math.PI * .55);
+       var rCurveY = rPointY - 15 * Math.sin(angle + Math.PI * .55);
+      
+       return "M" + sourceX + "," + sourceY + "Q" + lCurveX + "," + lCurveY + " " + lPointX + "," + lPointY + 
+         "L" + rPointX + "," + rPointY + "Q" + rCurveX + "," + rCurveY + " " + targetX + "," + targetY;
+       //return "M" + sourceX + "," + sourceY + "A" + 30 + "," + 30 + " " + xRotation + "," + largeArc + "," + sweep + " " + targetX + "," + targetY; 
     } 
     
     return 'M' + sourceX + ',' + sourceY + "A" + 
@@ -371,14 +384,28 @@ function mousemove() {
   // update drag line
   //TODO change dragline to be a self-referencing one in the case it is hovering over the same node
   if (mousedown_node == hover_node) {
-    var sweep = 1;
-    var largeArc = 1;
-    var xRotation = 60;
-    sourceX = mousedown_node.x + radius * .45;
-    sourceY = mousedown_node.y + radius * .65;
-    targetX = mousedown_node.x - ((radius + 5) * .45);
-    targetY = mousedown_node.y - ((radius + 5) * .65);
-    drag_line.attr('d', "M" + sourceX + "," + sourceY + "A" + 30 + "," + (-25) + " " + xRotation + "," + largeArc + "," + sweep + " " + targetX + "," + targetY);
+
+    var angle = Math.atan2(svg.attr("height") / 2 - mousedown_node.y, svg.attr("width") / 2 - mousedown_node.x);
+    var length = 55;
+
+    var sourceX = mousedown_node.x + radius * Math.cos(angle + Math.PI * .5);
+    var sourceY = mousedown_node.y  + radius * Math.sin(angle + Math.PI * .5);
+    var targetX = mousedown_node.x - ((radius + 3) * Math.cos(angle + Math.PI * .5));
+    var targetY = mousedown_node.y - ((radius + 3) * Math.sin(angle + Math.PI * .5));
+
+    var lPointX = sourceX - length * Math.cos(angle - Math.PI * .05);
+    var lPointY = sourceY - length * Math.sin(angle - Math.PI * .05);
+    var lCurveX = lPointX - 15 * Math.cos(angle - Math.PI * .55);
+    var lCurveY = lPointY - 15 * Math.sin(angle - Math.PI * .55);
+
+    var rPointX = targetX - length * Math.cos(angle + Math.PI * .05);
+    var rPointY = targetY - length * Math.sin(angle + Math.PI * .05);
+    var rCurveX = rPointX - 15 * Math.cos(angle + Math.PI * .55);
+    var rCurveY = rPointY - 15 * Math.sin(angle + Math.PI * .55);
+      
+    drag_line.attr('d' , "M" + sourceX + "," + sourceY + "Q" + lCurveX + "," + lCurveY + " " + lPointX + "," + lPointY + 
+         "L" + rPointX + "," + rPointY + "Q" + rCurveX + "," + rCurveY + " " + targetX + "," + targetY);
+  
   } else 
     drag_line.attr('d', 'M' + mousedown_node.x + ',' + mousedown_node.y + 'L' + d3.mouse(this)[0] + ',' + d3.mouse(this)[1]);
 
