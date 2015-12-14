@@ -131,11 +131,17 @@
       <div class="row">
         <div class="medium-4 columns">
           <p>For this problem, you will be trying to model the FSM of a button interactor. A button is provided below for you to test with.</p>
-          <button id="testButton" class="button" type="button">Test Button</button>
+          <a id="testButton" class="button" type="button" tabindex="-1">Test Button</a>
           <span id="testOutput" style="display: none">Button Pressed!</span>
           <script>$("#testButton").click(function() { $("#testOutput").show().delay(1000).fadeOut() })</script>
           <p>
-            Use the graphing tool on the right to enter your FSM. You can create nodes by clicking anywhere on the canvas without a link or node. Links between nodes are created by dragging and dropping links between them. To enter an event and action for a link, click on the link and a popup will appear. 
+            Use the graphing tool on the right to enter your FSM. You can create nodes by clicking anywhere on the canvas without a link or node. Links between nodes are created by dragging and dropping links between them. To enter an event and action for a link, click on the link and a popup will appear.
+          </p>
+          <p>
+            You can also reposition the nodes to make it easier to make your graph. Hold down the 'Control' key and drag a node to fix its position.
+          </p>
+          <p>
+            To make a state and end state, highlight it and press the 'E' button on your keyboard. 
           </p>
         </div>
         <div class="medium-8 columns">

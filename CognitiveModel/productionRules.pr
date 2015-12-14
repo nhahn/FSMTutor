@@ -14,6 +14,7 @@
 ;;
 
 (defrule create-state
+    (declare (salience -100))    ; this should happen after all transition information is entered
     ?prob <- (problem (count-state ?cs)(total-state ?ts)(ie-states $? ?ie $?)(curr-states $?curr-s))
     (test (< ?cs ?ts))
     ?ie <- (interface-element (name ?sel)(value nil))
@@ -21,19 +22,70 @@
     	=>
     (predict ?sel UpdateText createState)
     (modify ?prob (count-state (+ ?cs 1))(curr-states (create$ ?curr-s ?sel)))
-    )
+	(construct-message
+    "[ Is there anything else the interactor can do? ]"
+    "[ Create a new state ]"
+    ))
 
-(defrule create-transition
+(defrule create-transition-1
     ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
     ?ie1 <- (interface-element (name ?sel1))
     ?ie2 <- (interface-element (name ?sel2))
+    ?sp1 <- (state-pair (real-state ?rs1)(student-state ?sel1))
+    ?sp2 <- (state-pair (real-state ?rs2)(student-state ?sel2))
+    ?tr <- (transition (prev-state ?rs1)(next-state ?rs2))
     	=>
     (predict ?sel1 UpdateList ?sel2)
     (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
     (modify ?prob (curr-transitions (create$ ?ct ?t)))
-    ;(bind $?ct (insert$ $?ct ?t))
+    )
+
+(defrule create-transition-2
+    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct))
+    ?prob <- (problem (ie-states $? ?ie2 $?))
+    (test (neq ?ie1 ?ie2))
+    ?ie1 <- (interface-element (name ?sel1))
+    ?ie2 <- (interface-element (name ?sel2))
+    ?sp1 <- (state-pair (real-state ?rs1)(student-state ?sel1))
+    (not (state-pair (real-state ?rs2)(student-state ?sel2)))
+    ?tr <- (transition (prev-state ?rs1)(next-state ?ns))
+    ?spc <- (state-pair (real-state ?ns)(student-state ?ss&:(eq ?ss nil)))
+    	=>
+    (predict ?sel1 UpdateList ?sel2)
+    (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
+    (modify ?prob (curr-transitions (create$ ?ct ?t)))    
+    )
+
+(defrule create-transition-3
+    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct))
+    ?prob <- (problem (ie-states $? ?ie2 $?))
+    (test (neq ?ie1 ?ie2))
+    ?ie1 <- (interface-element (name ?sel1))
+    ?ie2 <- (interface-element (name ?sel2))
+    ?sp2 <- (state-pair (real-state ?rs2)(student-state ?sel2))
+    (not (state-pair (real-state ?rs1)(student-state ?sel1)))
+    ?tr <- (transition (prev-state ?rs2)(next-state ?ns))
+    ?spc <- (state-pair (real-state ?ns)(student-state ?ss&:(eq ?ss nil)))
+    	=>
+    (predict ?sel1 UpdateList ?sel2)
+    (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
+    (modify ?prob (curr-transitions (create$ ?ct ?t)))
+    )
+
+(defrule create-transition-4
+    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct))
+    ?prob <- (problem (ie-states $? ?ie2 $?))
+    (test (neq ?ie1 ?ie2))
+    ?ie1 <- (interface-element (name ?sel1))
+    ?ie2 <- (interface-element (name ?sel2))
+    (not (state-pair (real-state ?rs1)(student-state ?sel1)))
+    (not (state-pair (real-state ?rs2)(student-state ?sel2)))
+    	=>
+    (predict ?sel1 UpdateList ?sel2)
+    (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
+    (modify ?prob (curr-transitions (create$ ?ct ?t)))
     )
 
 (defrule modify-event-1
@@ -50,7 +102,10 @@
     (predict ?sel UpdateComboBox ?ev)
     (modify ?t (event ?ev))
     (modify ?sp2 (student-state ?s2))
-    )
+	(construct-message
+    "[ Check the interactor -- what is happening to cause this transtion? ]"
+    "[ The event is " ?ev ". ]"
+    ))
 
 (defrule modify-event-2
     ?prob <- (problem (curr-transitions $? ?t $?))
@@ -66,14 +121,17 @@
     (predict ?sel UpdateComboBox ?ev)
     (modify ?t (event ?ev))
     (modify ?sp1 (student-state ?s1))
-    )
+	(construct-message
+    "[ Check the interactor -- what is happening to cause this transtion? ]"
+    "[ The event is " ?ev ". ]"
+    ))
 
 (defrule modify-action-1
     ?prob <- (problem (curr-transitions $? ?t $?))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(action nil)) ;current transition
     ?sp1 <- (state-pair (student-state ?s1)(real-state ?rs1))
     (test (neq ?rs1 nil))
-    ?rt <- (transition (prev-state ?rs1)(next-state ?rs2)(action ?ac))
+    ?rt <- (transition (prev-state ?rs1)(next-state ?rs2)(action ?ac)(event ?ev))
     ?sp2 <- (state-pair (real-state ?rrs2))
     (test (eq ?rs2 ?rrs2))
     
@@ -82,14 +140,17 @@
     (predict ?sel UpdateComboBox ?ac)
     (modify ?t (action ?ac))
     (modify ?sp2 (student-state ?s2))
-    )
+	(construct-message
+    "[ Check the interactor -- what is happening when you " ?ev "? ]"
+    "[ The action is " ?ac ". ]"
+    ))
 
 (defrule modify-action-2
     ?prob <- (problem (curr-transitions $? ?t $?))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(action nil)) ;current transition
     ?sp2 <- (state-pair (student-state ?s2)(real-state ?rs2))
     (test (neq ?rs2 nil))
-    ?rt <- (transition (prev-state ?rs1)(next-state ?rs2)(action ?ac))
+    ?rt <- (transition (prev-state ?rs1)(next-state ?rs2)(action ?ac)(event ?ev))
     ?sp2 <- (state-pair (real-state ?rrs1))
     (test (eq ?rs1 ?rrs1))
     
@@ -98,14 +159,18 @@
     (predict ?sel UpdateComboBox ?ac)
     (modify ?t (action ?ac))
     (modify ?sp1 (student-state ?s1))
-    )
-
+	(construct-message
+    "[ Check the interactor -- what is happening when you " ?ev "? ]"
+    "[ The action is " ?ac ". ]"
+    ))
 (defrule transition-done
     ?prob <- (problem (curr-transitions $? ?t $?))
+    ?prob <- (problem (curr-transitions $?ct))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(event ?ev)(action ?ac)) ;current transition
     (test (and (neq ?ev nil)(neq ?ac nil)))
     	=>
-    (modify ?t (prev-state nil)(next-state nil)(event nil)(action nil))
+    (bind ?tmp (create$ ?t))
+    (modify ?prob (curr-transitions (complement$ ?ct ?tmp)))
     
     )
 

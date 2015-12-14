@@ -246,16 +246,14 @@ function restart() {
     .style('stroke', function(d) { return d3.rgb(colors(d.id)).darker().toString(); })
     .classed('reflexive', function(d) { return d.reflexive; })
     .on('mouseover', function(d) {
-      if(!mousedown_node) return;
+      d3.select(this).attr('transform', 'scale(1.1)');
       // enlarge target node
       hover_node = d;
-      d3.select(this).attr('transform', 'scale(1.1)');
     })
     .on('mouseout', function(d) {
-      if(!mousedown_node) return;
+      d3.select(this).attr('transform', '');
       // unenlarge target node
       hover_node = null;
-      d3.select(this).attr('transform', '');
     })
     .on('mousedown', function(d) {
       if(d3.event.ctrlKey) return;
@@ -273,6 +271,7 @@ function restart() {
       restart();
     })
     .on('mouseup', function(d) {
+      if(d3.event.ctrlKey) return;
       if(!mousedown_node) return;
       if(frozen) return;
 
@@ -452,6 +451,10 @@ function keydown() {
   if(d3.event.keyCode === 17) {
     circle.call(drag);
     svg.classed('ctrl', true);
+  }
+  
+  if(hover_node && d3.event.keyCode === 69 ) {
+    sendMessage("State"+hover_node.id, "UpdateText", "End")
   }
 
   if(!selected_node && !selected_link) return;
