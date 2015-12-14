@@ -270,7 +270,7 @@
                         <value>State0</value>
                     </Selection>
                     <Action>
-                        <value>createTransition</value>
+                        <value>UpdateList</value>
                     </Action>
                     <Input>
                         <value>State1</value>
@@ -295,7 +295,7 @@
                 <Action>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">createTransition</matcherParameter>
+                        <matcherParameter name="single">UpdateList</matcherParameter>
                     </matcher>
                 </Action>
                 <Input>
@@ -330,7 +330,7 @@
                         <value>eventFrom0To1</value>
                     </Selection>
                     <Action>
-                        <value>modifyCondition</value>
+                        <value>UpdateComboBox</value>
                     </Action>
                     <Input>
                         <value>mouseMoveInside</value>
@@ -570,10 +570,10 @@
                         <value>State2</value>
                     </Selection>
                     <Action>
-                        <value>createState</value>
+                        <value>UpdateText</value>
                     </Action>
                     <Input>
-                        <value>-1</value>
+                        <value>createState</value>
                     </Input>
                     <transaction_id>T043994bc-73bf-405f-9184-357d9b00b525</transaction_id>
                 </properties>
@@ -595,12 +595,13 @@
                 <Action>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">createState</matcherParameter>
+                        <matcherParameter name="single">UpdateText</matcherParameter>
                     </matcher>
                 </Action>
                 <Input>
                     <matcher>
-                        <matcherType>AnyMatcher</matcherType>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">createState</matcherParameter>
                     </matcher>
                 </Input>
                 <Actor linkTriggered="false">Student</Actor>
@@ -1768,10 +1769,10 @@
                         <value>State1</value>
                     </Selection>
                     <Action>
-                        <value>createState</value>
+                        <value>UpdateText</value>
                     </Action>
                     <Input>
-                        <value>beginTransition</value>
+                        <value>createState</value>
                     </Input>
                     <transaction_id>T043994bc-73bf-405f-9184-357d9b00b525</transaction_id>
                 </properties>
@@ -1793,12 +1794,13 @@
                 <Action>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">createState</matcherParameter>
+                        <matcherParameter name="single">UpdateText</matcherParameter>
                     </matcher>
                 </Action>
                 <Input>
                     <matcher>
-                        <matcherType>AnyMatcher</matcherType>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">createState</matcherParameter>
                     </matcher>
                 </Input>
                 <Actor linkTriggered="false">Student</Actor>
@@ -1827,7 +1829,7 @@
                         <value>State1</value>
                     </Selection>
                     <Action>
-                        <value>createTransition</value>
+                        <value>UpdateList</value>
                     </Action>
                     <Input>
                         <value>State0</value>
@@ -1852,7 +1854,7 @@
                 <Action>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">createTransition</matcherParameter>
+                        <matcherParameter name="single">UpdateList</matcherParameter>
                     </matcher>
                 </Action>
                 <Input>
@@ -1887,7 +1889,7 @@
                         <value>State1</value>
                     </Selection>
                     <Action>
-                        <value>createTransition</value>
+                        <value>UpdateList</value>
                     </Action>
                     <Input>
                         <value>State2</value>
@@ -1912,7 +1914,7 @@
                 <Action>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">createTransition</matcherParameter>
+                        <matcherParameter name="single">UpdateList</matcherParameter>
                     </matcher>
                 </Action>
                 <Input>

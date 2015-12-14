@@ -77,7 +77,8 @@ var selected_node = null, //This is set if we have a node in error
     mousedown_link = null,
     mousedown_node = null,
     hover_node = null, //To check which node we are hovering over
-    mouseup_node = null;
+    mouseup_node = null,
+    highlight = null;
 
 function resetMouseVars() {
   mousedown_node = null;
@@ -146,6 +147,7 @@ function restart() {
   // update existing links
   path.classed('selected', function(d) { return d === selected_link; })
     .style('marker-start', function(d) { return ''; })
+    .style('stroke', function(d) { return (d === highlight)? '#FFD700' : '' })
     .style('marker-end', function(d) { return 'url(#end-arrow)'; });
 
 
@@ -156,16 +158,6 @@ function restart() {
     .style('marker-start', function(d) { return ''; })
     .attr("id",function(d,i) { return "linkId_" + i; })
     .style('marker-end', function(d) { return 'url(#end-arrow)'; })
-//    .on('mousedown', function(d) {
-//      if(d3.event.ctrlKey) return;
-//      //TODO disable this -- we don't want them selecting random links
-//      // select link
-//      mousedown_link = d;
-//      if(mousedown_link === selected_link) selected_link = null;
-//      else selected_link = mousedown_link;
-//      selected_node = null;
-//      restart();
-//    })
     .on('mousedown', function(d) {
       //This is when we add a model to assign an event
       d3.event.stopPropagation();
@@ -192,6 +184,10 @@ function restart() {
       });
       addCTATElement(action[0]);
       $('#transitionModal').foundation('open');
+    }).on('mouseover', function(d) {
+      d3.select(this).style('stroke-width', '6px');
+    }).on('mouseout', function(d) {
+      d3.select(this).style('stroke-width', '4px');
     });
 
   linktext_event = linktext_event.data(force.links().filter(function(d) { return d.event}));
@@ -235,8 +231,9 @@ function restart() {
 
   // update existing nodes (reflexive & selected visual states)
   circle.selectAll('circle')
-    .style('fill', function(d) { return (d === selected_node) ? d3.rgb(colors(d.id)).brighter().toString() : colors(d.id); })
-    .style('stroke', function(d) { return (d === selected_node) ? '#F00' : d3.rgb(colors(d.id)).darker().toString(); })
+    .style('fill', function(d) { return (d === selected_node)? d3.rgb(colors(d.id)).brighter().toString() : colors(d.id); })
+    .style('stroke', function(d) { return (d === selected_node)? '#F00' : (d === highlight)? '#FFD700' : d3.rgb(colors(d.id)).darker().toString(); })
+    .style('stroke-width', function(d) { return (d === highlight)? '6px' : '1.5px' })
     .classed('reflexive', function(d) { return d.reflexive; });
 
   // add new nodes
@@ -313,7 +310,7 @@ function restart() {
 
       // select new link
       selected_node = null;
-      sendMessage("State"+source.id, "createTransition", "State"+target.id)
+      sendMessage("State"+source.id, "UpdateList", "State"+target.id)
       restart();
     });
 
@@ -374,7 +371,7 @@ function mousedown() {
   restart();
   // @FSMTutor this is where we send our command
   // for a new node
-  sendMessage("State"+lastNodeId, "createState", "createState");
+  sendMessage("State"+lastNodeId, "UpdateText", "createState");
 }
 
 function mousemove() {
@@ -490,6 +487,7 @@ function keyup() {
 
 function sendMessage(selection, action, input) {
   frozen = true;
+  highlight = null;
   commShell.gradeSAI(selection, action, input);
 }
 
@@ -507,13 +505,13 @@ d3.select(window)
 
 function gradingFix(selection, action, input) {
   switch (action) {
-    case 'createState':
+    case 'UpdateText':
       selected_node = nodes.filter(function(n) {
         return (n.id == parseInt(selection.substring(5)));
       })[0];
       restart();
       break;
-    case 'createTransition':
+    case 'UpdateList':
       selected_link = findLinkById(parseInt(selection.substring(5)), parseInt(input.substring(5)));
       restart();
       break;
@@ -533,9 +531,36 @@ function processCorrect(selection, action, input) {
   }
 }
 
-function highlightHandler(highlight, message) {
-  console.log("Highlight: " + highlight + " " + message.getSelection() + " " + message.getAction() + " " + message.getInput());
+function highlightHandler(shouldHighlight, message) {
+  console.log("Highlight: " + shouldHighlight + " " + message.getSelection() + " " + message.getAction() + " " + message.getInput());
+  switch (message.getAction()) {
+    case 'UpdateList': //Transition in this case
+      var match = /State(\d+)/.exec(message.getSelection());
+      highlight = nodes.filter(function(n) {
+        return (n.id == parseInt(match[1]));
+      })[0];
+      restart();
+      break;      
+    case 'UpdateText':  
+//      if (message.getAction() == 'End')
+//      
+//      else 
+      console.log("not sure what to do here");
+      break;
+    case 'UpdateComboBox':
+      var match = /(action|event)From(\d+)To(\d+)/.exec(message.getSelection());
+      if (match != null) {
+        highlight = findLinkById(parseInt(match[2]), parseInt(match[3]));
+        restart();
+      }
+      break;
+  }
 }
+
+$(window).on('closed.zf.reveal', function() {
+   $("#transitionEvent div").html("").removeAttr('data-ctat-component').removeAttr('id');
+   $("#transitionAction div").html("").removeAttr('data-ctat-component').removeAttr('id');
+});
 
 resize();
 d3.select(window).on("resize", resize);
