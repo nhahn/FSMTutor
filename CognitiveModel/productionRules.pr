@@ -14,7 +14,6 @@
 ;;
 
 (defrule create-state
-    (declare (salience -100))    ; this should happen after all transition information is entered
     ?prob <- (problem (count-state ?cs)(total-state ?ts)(ie-states $? ?ie $?)(curr-states $?curr-s)(subGoal ?g&:(eq ?g nil)))
     (test (< ?cs ?ts))
     ?ie <- (interface-element (name ?sel)(value nil))
@@ -28,6 +27,7 @@
     ))
 
 (defrule create-transition-1
+    (declare (salience 10))  
     ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
@@ -40,9 +40,13 @@
     (predict ?sel1 UpdateList ?sel2)
     (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
     (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))
-    )
+    (construct-message
+    "[ What events can happen in this state? ]"
+    "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
+    ))
 
 (defrule create-transition-2
+    (declare (salience 10))  
     ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
@@ -56,9 +60,13 @@
     (predict ?sel1 UpdateList ?sel2)
     (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
     (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))    
-    )
+    (construct-message
+    "[ What events can happen in this state? ]"
+    "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
+    ))
 
 (defrule create-transition-3
+    (declare (salience 10))  
     ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
@@ -72,9 +80,13 @@
     (predict ?sel1 UpdateList ?sel2)
     (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
     (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))
-    )
+    (construct-message
+    "[ What events can happen in this state? ]"
+    "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
+    ))
 
 (defrule create-transition-4
+    (declare (salience 10))  
     ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
@@ -86,9 +98,13 @@
     (predict ?sel1 UpdateList ?sel2)
     (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
     (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))
-    )
+    (construct-message
+    "[ What events can happen in this state? ]"
+    "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
+    ))
 
 (defrule modify-event-1
+    (declare (salience 20)) ;Events should be entered before actions for hints
     ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac)))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(event nil)) ;current transition
     ?sp1 <- (state-pair (student-state ?s1)(real-state ?rs1))
@@ -108,6 +124,7 @@
     ))
 
 (defrule modify-event-2
+    (declare (salience 20)) ;Events should be entered before actions for hints
     ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac)))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(event nil)) ;current transition
     ?sp2 <- (state-pair (student-state ?s2)(real-state ?rs2))
@@ -127,6 +144,7 @@
     ))
 
 (defrule modify-event-3
+    (declare (salience 20)) ;Events should be entered before actions for hints
     ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac)))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(event nil)) ;current transition
     ?sp1 <- (state-pair (student-state ?s1)(real-state ?rs1))
@@ -218,7 +236,10 @@
     
     	=>
     (predict ?s1 UpdateText End)
-    )
+    (construct-message
+    "[ Are there any transitions from this state? ]"
+    "[ Set this state as an end state ]"
+    ))
 
 (defrule done
     (problem (transition-count ?tc))
