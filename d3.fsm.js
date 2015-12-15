@@ -135,7 +135,10 @@ function tick() {
   });
 
   circle.attr('transform', function(d) {
-    return 'translate(' + d.x + ',' + d.y + ')';
+    var str = 'translate(' + d.x + ',' + d.y + ')';
+    if (hover_node && d.id === hover_node.id)
+      str += ' scale(1.1)';
+    return str;
   });
 }
 
@@ -147,6 +150,7 @@ function restart() {
   // update existing links
   path.classed('selected', function(d) { return d === selected_link; })
     .style('marker-start', function(d) { return ''; })
+    .classed('correct', function(d) { return d.correct })
     .style('stroke', function(d) { return (d === highlight)? '#FFD700' : '' })
     .style('marker-end', function(d) { return 'url(#end-arrow)'; });
 
@@ -230,31 +234,34 @@ function restart() {
   circle = circle.data(nodes, function(d) { return d.id; });
 
   // update existing nodes (reflexive & selected visual states)
-  circle.selectAll('circle')
+  circle.selectAll('circle.node')
+    .classed('correct', function(d) { return d.correct })
     .style('fill', function(d) { return (d === selected_node)? d3.rgb(colors(d.id)).brighter().toString() : colors(d.id); })
-    .style('stroke', function(d) { return (d === selected_node)? '#F00' : (d === highlight)? '#FFD700' : d3.rgb(colors(d.id)).darker().toString(); })
-    .style('stroke-width', function(d) { return (d === highlight)? '6px' : '1.5px' })
+    .style('stroke', function(d) { return (d === selected_node)? '#F00' : (d === highlight)? '#FFD700' : ''; })
+    .style('stroke-width', function(d) { return (d === highlight)? '6px' : '2px' })
     .classed('reflexive', function(d) { return d.reflexive; });
-
+  
   // add new nodes
-  var g = circle.enter().append('svg:g');
+  var g = circle.enter().append('svg:g')
+    .on('mouseover', function(d) {
+      var select = d3.select(this);
+      select.attr('transform', select.attr('transform') + ' scale(1.1)');
+      // enlarge target node
+      hover_node = d;
+    })
+    .on('mouseout', function(d) {
+      var select = d3.select(this);
+      var str = select.attr('transform');
+      select.attr('transform', str.replace(" scale(1.1)", ''));
+      // unenlarge target node
+      hover_node = null;
+    });
 
   g.append('svg:circle')
     .attr('class', 'node')
     .attr('r', radius)
     .style('fill', function(d) { return (d === selected_node) ? d3.rgb(colors(d.id)).brighter().toString() : colors(d.id); })
-    .style('stroke', function(d) { return d3.rgb(colors(d.id)).darker().toString(); })
     .classed('reflexive', function(d) { return d.reflexive; })
-    .on('mouseover', function(d) {
-      d3.select(this).attr('transform', 'scale(1.1)');
-      // enlarge target node
-      hover_node = d;
-    })
-    .on('mouseout', function(d) {
-      d3.select(this).attr('transform', '');
-      // unenlarge target node
-      hover_node = null;
-    })
     .on('mousedown', function(d) {
       if(d3.event.ctrlKey) return;
       if(frozen) return;
@@ -319,7 +326,7 @@ function restart() {
       .attr('y', 4)
       .attr('class', 'id')
       .text(function(d) { return d.id; });
-
+  
   // remove old nodes
   circle.exit().remove();
 
@@ -454,7 +461,18 @@ function keydown() {
   }
   
   if(hover_node && d3.event.keyCode === 69 ) {
-    sendMessage("State"+hover_node.id, "UpdateText", "End")
+    if (hover_node.end) return;
+    hover_node.end = true;
+    //Add in our finalSates
+    circle.data(nodes.filter(function(d) { return d.id == hover_node.id}), 
+                function(d) { return d.id})
+      .append('svg:circle')
+      .attr('class', 'outer')
+      .attr('r', radius+4)
+      .style('fill', 'none')
+      .style('stroke-width', '2px' )
+      .style('stroke', function(d) { return d3.rgb(colors(d.id)).darker().toString(); });
+    sendMessage("State"+hover_node.id, "UpdateText", "End");
   }
 
   if(!selected_node && !selected_link) return;
@@ -509,17 +527,24 @@ d3.select(window)
 function gradingFix(selection, action, input) {
   switch (action) {
     case 'UpdateText':
-      selected_node = nodes.filter(function(n) {
-        return (n.id == parseInt(selection.substring(5)));
-      })[0];
-      restart();
-      break;
+      if (action != 'End') {
+        selected_node = nodes.filter(function(n) {
+          return (n.id == parseInt(selection.substring(5)));
+        })[0];
+        restart();
+        break;
+      } else {
+         
+      }
     case 'UpdateList':
       selected_link = findLinkById(parseInt(selection.substring(5)), parseInt(input.substring(5)));
       restart();
       break;
   }
 }
+
+//TODO correct for final state
+//TODO how to correct final state if entered incorrectly
 
 function processCorrect(selection, action, input) {
   switch (action) {
@@ -530,6 +555,21 @@ function processCorrect(selection, action, input) {
         link[match[1]] = input;
         restart();
       }
+      break;
+    case 'UpdateText':
+      if (action != 'End') {
+        nodes.filter(function(n) {
+          return (n.id == parseInt(selection.substring(5)));
+        })[0].correct = true;
+        restart();
+        break;
+      } else {
+         
+      }
+    case 'UpdateList':
+      var link = findLinkById(parseInt(selection.substring(5)), parseInt(input.substring(5)));
+      link.correct = true;
+      restart();
       break;
   }
 }
@@ -545,10 +585,13 @@ function highlightHandler(shouldHighlight, message) {
       restart();
       break;      
     case 'UpdateText':  
-//      if (message.getAction() == 'End')
-//      
-//      else 
-      console.log("not sure what to do here");
+      if (message.getAction() == 'End') {
+        var match = /State(\d+)/.exec(message.getSelection());
+        highlight = nodes.filter(function(n) {
+          return (n.id == parseInt(match[1]));
+        })[0];
+        restart();
+      }
       break;
     case 'UpdateComboBox':
       var match = /(action|event)FromState(\d+)ToState(\d+)/.exec(message.getSelection());
