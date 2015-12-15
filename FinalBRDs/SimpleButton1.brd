@@ -60,224 +60,232 @@
         <text>state8</text>
         <uniqueID>9</uniqueID>
         <dimension>
-            <x>109</x>
-            <y>374</y>
+            <x>166</x>
+            <y>280</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state9</text>
         <uniqueID>10</uniqueID>
         <dimension>
-            <x>109</x>
-            <y>427</y>
+            <x>166</x>
+            <y>333</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state10</text>
         <uniqueID>11</uniqueID>
         <dimension>
-            <x>99</x>
-            <y>469</y>
+            <x>156</x>
+            <y>375</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state11</text>
         <uniqueID>12</uniqueID>
         <dimension>
-            <x>126</x>
-            <y>547</y>
+            <x>183</x>
+            <y>453</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state13</text>
         <uniqueID>14</uniqueID>
         <dimension>
-            <x>185</x>
-            <y>709</y>
+            <x>242</x>
+            <y>615</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state14</text>
         <uniqueID>15</uniqueID>
         <dimension>
-            <x>200</x>
-            <y>796</y>
+            <x>257</x>
+            <y>702</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state15</text>
         <uniqueID>16</uniqueID>
         <dimension>
-            <x>219</x>
-            <y>863</y>
+            <x>276</x>
+            <y>769</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state16</text>
         <uniqueID>17</uniqueID>
         <dimension>
-            <x>233</x>
-            <y>983</y>
+            <x>290</x>
+            <y>889</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state17</text>
         <uniqueID>18</uniqueID>
         <dimension>
-            <x>233</x>
-            <y>1093</y>
+            <x>290</x>
+            <y>999</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state19</text>
         <uniqueID>20</uniqueID>
         <dimension>
-            <x>233</x>
-            <y>1313</y>
+            <x>290</x>
+            <y>1219</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state20</text>
         <uniqueID>21</uniqueID>
         <dimension>
-            <x>233</x>
-            <y>1423</y>
+            <x>290</x>
+            <y>1329</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state21</text>
         <uniqueID>22</uniqueID>
         <dimension>
-            <x>221</x>
-            <y>1493</y>
+            <x>278</x>
+            <y>1399</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state22</text>
         <uniqueID>23</uniqueID>
         <dimension>
-            <x>244</x>
-            <y>1551</y>
+            <x>301</x>
+            <y>1457</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state24</text>
         <uniqueID>25</uniqueID>
         <dimension>
-            <x>252</x>
-            <y>1594</y>
+            <x>309</x>
+            <y>1500</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state26</text>
         <uniqueID>27</uniqueID>
         <dimension>
-            <x>235</x>
-            <y>1740</y>
+            <x>292</x>
+            <y>1646</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state27</text>
         <uniqueID>28</uniqueID>
         <dimension>
-            <x>253</x>
-            <y>1793</y>
+            <x>310</x>
+            <y>1699</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state36</text>
         <uniqueID>37</uniqueID>
         <dimension>
-            <x>259</x>
-            <y>1867</y>
+            <x>316</x>
+            <y>1773</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state37</text>
         <uniqueID>38</uniqueID>
         <dimension>
-            <x>291</x>
-            <y>2109</y>
+            <x>348</x>
+            <y>2015</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state41</text>
         <uniqueID>42</uniqueID>
         <dimension>
-            <x>149</x>
-            <y>2169</y>
+            <x>206</x>
+            <y>2075</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state42</text>
         <uniqueID>43</uniqueID>
         <dimension>
-            <x>171</x>
-            <y>2285</y>
+            <x>228</x>
+            <y>2191</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state43</text>
         <uniqueID>44</uniqueID>
         <dimension>
-            <x>200</x>
-            <y>2406</y>
+            <x>257</x>
+            <y>2312</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state44</text>
         <uniqueID>45</uniqueID>
         <dimension>
-            <x>232</x>
-            <y>2525</y>
+            <x>289</x>
+            <y>2431</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state45</text>
         <uniqueID>46</uniqueID>
         <dimension>
-            <x>232</x>
-            <y>2635</y>
+            <x>289</x>
+            <y>2541</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state46</text>
         <uniqueID>47</uniqueID>
         <dimension>
-            <x>267</x>
-            <y>2731</y>
+            <x>324</x>
+            <y>2637</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
         <text>state47</text>
         <uniqueID>48</uniqueID>
         <dimension>
-            <x>295</x>
-            <y>2849</y>
+            <x>352</x>
+            <y>2755</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
-        <text>state48</text>
-        <uniqueID>49</uniqueID>
+        <text>state51</text>
+        <uniqueID>52</uniqueID>
         <dimension>
-            <x>78</x>
-            <y>1026</y>
+            <x>131</x>
+            <y>570</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
-        <text>state49</text>
-        <uniqueID>50</uniqueID>
+        <text>state52</text>
+        <uniqueID>53</uniqueID>
         <dimension>
-            <x>94</x>
-            <y>1147</y>
+            <x>131</x>
+            <y>680</y>
         </dimension>
     </node>
     <node locked="false" doneState="false">
-        <text>state50</text>
-        <uniqueID>51</uniqueID>
+        <text>state53</text>
+        <uniqueID>54</uniqueID>
         <dimension>
-            <x>94</x>
-            <y>1257</y>
+            <x>158</x>
+            <y>801</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state54</text>
+        <uniqueID>55</uniqueID>
+        <dimension>
+            <x>337</x>
+            <y>337</y>
         </dimension>
     </node>
     <edge>
@@ -331,7 +339,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -391,7 +399,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -451,7 +459,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -511,7 +519,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -571,7 +579,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -631,7 +639,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -668,7 +676,7 @@
             <callbackFn></callbackFn>
             <actionType>Correct Action</actionType>
             <oldActionType>Correct Action</oldActionType>
-            <checkedStatus>NO-MODEL</checkedStatus>
+            <checkedStatus>SUCCESS</checkedStatus>
             <matchers Concatenation="true">
                 <Selection>
                     <matcher>
@@ -691,7 +699,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -728,7 +736,7 @@
             <callbackFn></callbackFn>
             <actionType>Correct Action</actionType>
             <oldActionType>Correct Action</oldActionType>
-            <checkedStatus>NO-MODEL</checkedStatus>
+            <checkedStatus>SUCCESS</checkedStatus>
             <matchers Concatenation="true">
                 <Selection>
                     <matcher>
@@ -751,7 +759,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -811,7 +819,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -848,7 +856,7 @@
             <callbackFn></callbackFn>
             <actionType>Correct Action</actionType>
             <oldActionType>Correct Action</oldActionType>
-            <checkedStatus>NO-MODEL</checkedStatus>
+            <checkedStatus>SUCCESS</checkedStatus>
             <matchers Concatenation="true">
                 <Selection>
                     <matcher>
@@ -871,7 +879,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -931,7 +939,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -991,7 +999,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1051,7 +1059,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1111,7 +1119,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1171,7 +1179,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1231,7 +1239,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1268,7 +1276,7 @@
             <callbackFn></callbackFn>
             <actionType>Correct Action</actionType>
             <oldActionType>Correct Action</oldActionType>
-            <checkedStatus>NO-MODEL</checkedStatus>
+            <checkedStatus>SUCCESS</checkedStatus>
             <matchers Concatenation="true">
                 <Selection>
                     <matcher>
@@ -1291,7 +1299,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1351,7 +1359,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1411,7 +1419,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1471,7 +1479,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1531,7 +1539,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1591,7 +1599,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1651,7 +1659,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1711,7 +1719,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1771,7 +1779,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1831,7 +1839,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1891,7 +1899,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1951,7 +1959,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -2011,7 +2019,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -2025,13 +2033,13 @@
             <studentHintRequest></studentHintRequest>
             <stepSuccessfulCompletion></stepSuccessfulCompletion>
             <stepStudentError></stepStudentError>
-            <uniqueID>140</uniqueID>
+            <uniqueID>148</uniqueID>
             <message>
                 <verb>SendNoteProperty</verb>
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>State4</value>
+                        <value>State3</value>
                     </Selection>
                     <Action>
                         <value>UpdateText</value>
@@ -2048,12 +2056,12 @@
             <callbackFn></callbackFn>
             <actionType>Correct Action</actionType>
             <oldActionType>Correct Action</oldActionType>
-            <checkedStatus>NO-MODEL</checkedStatus>
+            <checkedStatus>SUCCESS</checkedStatus>
             <matchers Concatenation="true">
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">State4</matcherParameter>
+                        <matcherParameter name="single">State3</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -2071,13 +2079,13 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
         </rule>
-        <sourceID>17</sourceID>
-        <destID>49</destID>
+        <sourceID>12</sourceID>
+        <destID>52</destID>
         <traversalCount>0</traversalCount>
     </edge>
     <edge>
@@ -2085,19 +2093,19 @@
             <studentHintRequest></studentHintRequest>
             <stepSuccessfulCompletion></stepSuccessfulCompletion>
             <stepStudentError></stepStudentError>
-            <uniqueID>143</uniqueID>
+            <uniqueID>151</uniqueID>
             <message>
                 <verb>SendNoteProperty</verb>
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>State2</value>
+                        <value>State1</value>
                     </Selection>
                     <Action>
                         <value>UpdateList</value>
                     </Action>
                     <Input>
-                        <value>State4</value>
+                        <value>State3</value>
                     </Input>
                     <transaction_id>T043994bc-73bf-405f-9184-357d9b00b525</transaction_id>
                 </properties>
@@ -2113,7 +2121,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">State2</matcherParameter>
+                        <matcherParameter name="single">State1</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -2125,19 +2133,19 @@
                 <Input>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">State4</matcherParameter>
+                        <matcherParameter name="single">State3</matcherParameter>
                     </matcher>
                 </Input>
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
         </rule>
-        <sourceID>49</sourceID>
-        <destID>50</destID>
+        <sourceID>52</sourceID>
+        <destID>53</destID>
         <traversalCount>0</traversalCount>
     </edge>
     <edge>
@@ -2145,19 +2153,79 @@
             <studentHintRequest></studentHintRequest>
             <stepSuccessfulCompletion></stepSuccessfulCompletion>
             <stepStudentError></stepStudentError>
-            <uniqueID>146</uniqueID>
+            <uniqueID>155</uniqueID>
             <message>
                 <verb>SendNoteProperty</verb>
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>eventFromState2ToState4</value>
+                        <value>eventFromState1ToState3</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
                     </Action>
                     <Input>
-                        <value>mouseUp</value>
+                        <value>mouseDown</value>
+                    </Input>
+                    <transaction_id>T043994bc-73bf-405f-9184-357d9b00b525</transaction_id>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>SUCCESS</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">eventFromState1ToState3</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">UpdateComboBox</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">mouseDown</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>53</sourceID>
+        <destID>54</destID>
+        <traversalCount>0</traversalCount>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>157</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>CorrectAction</MessageType>
+                    <Selection>
+                        <value>eventFromState1ToState0</value>
+                    </Selection>
+                    <Action>
+                        <value>UpdateComboBox</value>
+                    </Action>
+                    <Input>
+                        <value>mouseDown</value>
                     </Input>
                     <transaction_id>T043994bc-73bf-405f-9184-357d9b00b525</transaction_id>
                 </properties>
@@ -2173,7 +2241,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">eventFromState2ToState4</matcherParameter>
+                        <matcherParameter name="single">eventFromState1ToState0</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -2185,19 +2253,19 @@
                 <Input>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">mouseUp</matcherParameter>
+                        <matcherParameter name="single">mouseDown</matcherParameter>
                     </matcher>
                 </Input>
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <preCheckedStatus>NO-MODEL</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
         </rule>
-        <sourceID>50</sourceID>
-        <destID>51</destID>
+        <sourceID>9</sourceID>
+        <destID>55</destID>
         <traversalCount>0</traversalCount>
     </edge>
     <EdgesGroups ordered="false"></EdgesGroups>

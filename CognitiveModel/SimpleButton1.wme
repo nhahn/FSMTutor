@@ -25,7 +25,7 @@
             (prev-state 2)
             (next-state 3)
             (event mouseUp)
-            (action performAction)
+            (action performButtonAction)
             )))
 (bind ?t4 (assert (transition
             (prev-state 2)

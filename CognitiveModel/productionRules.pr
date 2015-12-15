@@ -15,7 +15,7 @@
 
 (defrule create-state
     (declare (salience -100))    ; this should happen after all transition information is entered
-    ?prob <- (problem (count-state ?cs)(total-state ?ts)(ie-states $? ?ie $?)(curr-states $?curr-s))
+    ?prob <- (problem (count-state ?cs)(total-state ?ts)(ie-states $? ?ie $?)(curr-states $?curr-s)(subGoal ?g&:(eq ?g nil)))
     (test (< ?cs ?ts))
     ?ie <- (interface-element (name ?sel)(value nil))
     (test (eq (member$ ?sel ?curr-s) FALSE))
@@ -94,8 +94,8 @@
     ?sp1 <- (state-pair (student-state ?s1)(real-state ?rs1))
     (test (neq ?rs1 nil))
     ?rt <- (transition (prev-state ?rs1)(next-state ?rs2)(event ?ev))
-    ?sp2 <- (state-pair (real-state ?rrs2))
-    (test (eq ?rs2 ?rrs2))
+    ?sp2 <- (state-pair (real-state ?rs2)(student-state nil))
+    (not (state-pair (student-state ?s2)))
     
     	=>
     (bind ?sel (str-cat "eventFrom" ?s1 "To" ?s2))
@@ -113,8 +113,8 @@
     ?sp2 <- (state-pair (student-state ?s2)(real-state ?rs2))
     (test (neq ?rs2 nil))
     ?rt <- (transition (prev-state ?rs1)(next-state ?rs2)(event ?ev))
-    ?sp2 <- (state-pair (real-state ?rrs1))
-    (test (eq ?rs1 ?rrs1))
+    ?sp1 <- (state-pair (real-state ?rs1)(student-state nil))
+    (not (state-pair (student-state ?s1)))
     
     	=>
     (bind ?sel (str-cat "eventFrom" ?s1 "To" ?s2))
@@ -126,14 +126,32 @@
     "[ The event is " ?ev ". ]"
     ))
 
+(defrule modify-event-3
+    ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac)))
+    ?t <- (transition (prev-state ?s1)(next-state ?s2)(event nil)) ;current transition
+    ?sp1 <- (state-pair (student-state ?s1)(real-state ?rs1))
+    ?sp2 <- (state-pair (student-state ?s2)(real-state ?rs2))
+    (test (neq ?rs1 nil))
+    (test (neq ?rs2 nil))
+    ?rt <- (transition (prev-state ?rs1)(next-state ?rs2)(event ?ev))
+    
+    	=>
+    (bind ?sel (str-cat "eventFrom" ?s1 "To" ?s2))
+    (predict ?sel UpdateComboBox ?ev)
+    (modify ?t (event ?ev))
+	(construct-message
+    "[ Check the interactor -- what is happening to cause this transtion? ]"
+    "[ The event is " ?ev ". ]"
+    ))
+
 (defrule modify-action-1
     ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac)))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(action nil)) ;current transition
     ?sp1 <- (state-pair (student-state ?s1)(real-state ?rs1))
     (test (neq ?rs1 nil))
     ?rt <- (transition (prev-state ?rs1)(next-state ?rs2)(action ?ac)(event ?ev))
-    ?sp2 <- (state-pair (real-state ?rrs2))
-    (test (eq ?rs2 ?rrs2))
+    ?sp2 <- (state-pair (real-state ?rs2)(student-state nil))
+    (not (state-pair (student-state ?s2)))
     
     	=>
     (bind ?sel (str-cat "actionFrom" ?s1 "To" ?s2))
@@ -151,8 +169,8 @@
     ?sp2 <- (state-pair (student-state ?s2)(real-state ?rs2))
     (test (neq ?rs2 nil))
     ?rt <- (transition (prev-state ?rs1)(next-state ?rs2)(action ?ac)(event ?ev))
-    ?sp2 <- (state-pair (real-state ?rrs1))
-    (test (eq ?rs1 ?rrs1))
+    ?sp1 <- (state-pair (real-state ?rs1)(student-state nil))
+    (not (state-pair (student-state ?s1)))
     
     	=>
     (bind ?sel (str-cat "actionFrom" ?s1 "To" ?s2))
@@ -162,6 +180,24 @@
 	(construct-message
     "[ Check the interactor -- what is happening when you " ?ev "? ]"
     "[ The action is " ?ac ". ]"
+    ))
+
+(defrule modify-action-3
+    ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac)))
+    ?t <- (transition (prev-state ?s1)(next-state ?s2)(action nil)) ;current transition
+    ?sp1 <- (state-pair (student-state ?s1)(real-state ?rs1))
+    ?sp2 <- (state-pair (student-state ?s2)(real-state ?rs2))
+    (test (neq ?rs1 nil))
+    (test (neq ?rs2 nil))
+    ?rt <- (transition (prev-state ?rs1)(next-state ?rs2)(action ?ac))
+    
+    	=>
+    (bind ?sel (str-cat "actionFrom" ?s1 "To" ?s2))
+    (predict ?sel UpdateComboBox ?ac)
+    (modify ?t (action ?ac))
+	(construct-message
+    "[ Check the interactor -- what is happening to cause this transtion? ]"
+    "[ The event is " ?ev ". ]"
     ))
 
 (defrule transition-done
@@ -177,7 +213,7 @@
     )
 
 (defrule set-end-state
-    ?prob <- (problem (end-state $? ?es $?))
+    ?prob <- (problem (end-state $? ?es $?)(subGoal ?g&:(eq ?g nil)))
     ?sp <- (state-pair (real-state ?es)(student-state ?s1))
     
     	=>
