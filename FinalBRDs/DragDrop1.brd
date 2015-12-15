@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="yes"?>
+
+<stateGraph firstCheckAllStates="false" caseInsensitive="true" unordered="true" lockWidget="true" hintPolicy="Use Both Kinds of Bias" version="2.1" suppressStudentFeedback="Show All Feedback" highlightRightSelection="true" startStateNodeName="%(startStateNodeName)%" tutorType="Cognitive Tutor (Jess)">
+    <startNodeMessages>
+        <message>
+            <verb>SendNoteProperty</verb>
+            <properties>
+                <MessageType>StartProblem</MessageType>
+                <ProblemName>SimpleButton</ProblemName>
+            </properties>
+        </message>
+        <message>
+            <verb>SendNoteProperty</verb>
+            <properties>
+                <MessageType>StartStateEnd</MessageType>
+            </properties>
+        </message>
+    </startNodeMessages>
+    <node locked="false" doneState="false">
+        <text>DragDrop</text>
+        <uniqueID>1</uniqueID>
+        <dimension>
+            <x>214</x>
+            <y>12</y>
+        </dimension>
+    </node>
+    <EdgesGroups ordered="false"></EdgesGroups>
+</stateGraph>
+

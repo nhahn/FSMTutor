@@ -1,0 +1,93 @@
+(require* wmeTypes "wmeTypes.clp")
+
+
+;; -------------------------------------------------------------------------------------------
+
+(bind ?t0 (assert (transition
+            (prev-state 0)
+            (next-state 1)
+            (event click)
+            (action openList)
+            )))
+(bind ?t1 (assert (transition
+            (prev-state 1)
+            (next-state 1)
+            (event moveOverOption)
+            (action highlightOption)
+            )))
+(bind ?t2 (assert (transition
+            (prev-state 1)
+            (next-state 2)
+            (event click)
+            (action selectOption)
+            )))
+(bind ?t3 (assert (transition
+            (prev-state 1)
+            (next-state 2)
+            (event moveOutsideList)
+            (action unhighlightOption)
+            )))
+(bind ?t4 (assert (transition
+            (prev-state 2)
+            (next-state 0)
+            (event click)
+            (action closeList)
+            )))
+
+
+(bind ?sp0 (assert (state-pair
+            (student-state State0)
+            (real-state 0)
+            )))
+
+(bind ?sp1 (assert (state-pair
+            (student-state nil)
+            (real-state 1)
+            )))
+
+(bind ?sp2 (assert (state-pair
+            (student-state nil)
+            (real-state 2)
+            )))
+
+(bind ?sp3 (assert (state-pair
+            (student-state nil)
+            (real-state 3)
+            )))
+
+
+;; States
+(bind ?s0 (assert (interface-element (name State0)(value binded))))
+(bind ?s1 (assert (interface-element (name State1))))
+(bind ?s2 (assert (interface-element (name State2))))
+(bind ?s3 (assert (interface-element (name State3))))
+
+;;Events
+(bind ?e01 (assert (interface-element (name eventFromState0ToState1))))
+(bind ?e10 (assert (interface-element (name eventFromState1ToState1))))
+(bind ?e12 (assert (interface-element (name eventFromState1ToState2))))
+(bind ?e23 (assert (interface-element (name eventFromState1ToState3))))
+(bind ?e24 (assert (interface-element (name eventFromState3ToState0))))
+
+;;Actions
+(bind ?a01 (assert (interface-element (name actionFromState0ToState1))))
+(bind ?a10 (assert (interface-element (name actionFromState1ToState1))))
+(bind ?a12 (assert (interface-element (name actionFromState1ToState2))))
+(bind ?a23 (assert (interface-element (name actionFromState1ToState3))))
+(bind ?a24 (assert (interface-element (name actionFromState3ToState0))))
+
+(bind ?prob (assert (problem
+		    (name SimpleButton)
+		    (total-state 4)
+		    (count-state 1) ;Start with only start state
+            (end-state 2)
+            (curr-states State0)
+            (transition-count 5)
+		    (ie-states ?s0 ?s1 ?s2)
+		    (ie-events ?e01 ?e10 ?e12 ?e23 ?e24)
+		    (ie-actions ?a01 ?a10 ?a12 ?a23 ?a24)
+    		)))
+
+
+
+
