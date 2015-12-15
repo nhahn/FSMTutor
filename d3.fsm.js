@@ -171,7 +171,7 @@ function restart() {
       var event = $("#transitionEvent div")
       event.attr("id", "eventFromState"+d.source.id+"ToState"+d.target.id);
       event.append($("<option></option>").attr("value", "").text("Select an Event"));
-      $.each(['mouseDown', 'mouseUp', 'mouseMoveOutside', 'mouseMoveInside'], function(key, value) {   
+      $.each(window.events, function(key, value) {   
         event.append($("<option></option>")
          .attr("value",value)
          .text(value)); 
@@ -181,7 +181,7 @@ function restart() {
       var action = $("#transitionAction div")
       action.attr("id", "actionFromState"+d.source.id+"ToState"+d.target.id);
       action.append($("<option></option>").attr("value", "").text("Select an Action"));
-      $.each(['highlightButton', 'noAction', 'performButtonAction', 'unhighlightButton', 'depressedButton', 'undepressedButton'], function(key, value) {   
+      $.each(window.actions, function(key, value) {   
         action.append($("<option></option>")
          .attr("value",value)
          .text(value)); 

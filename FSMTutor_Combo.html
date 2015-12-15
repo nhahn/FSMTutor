@@ -6,7 +6,7 @@
     <meta name="dcterms.created" content="Tue, 01 Sep 2015 15:55:08 GMT">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <title>Fraction Addition</title>
+    <title>FSM ComboBox Tutor</title>
 
     <link rel="stylesheet" href="vendor/foundation-sites/dist/foundation.min.css"/>
     <link rel="stylesheet" href="CTAT.css"/>
@@ -102,7 +102,7 @@
     <script>
       var skills = '<Skills><Skill name="add-numerators" category="fraction-addition" label="Add Numerators" description="Add Numerators" pKnown="0.25" pLearn="0.2" pGuess="0.2" pSlip="0.1" opportunityCount="0" /><Skill name="convert-numerator" category="fraction-addition" label="Convert Numerator" description="Convert Numerator" pKnown="0.25" pLearn="0.2" pGuess="0.2" pSlip="0.1" opportunityCount="0" /><Skill name="copy-answer-denominator" category="fraction-addition" label="Copy Answer Denominator" description="Copy Answer Denominator" pKnown="0.25" pLearn="0.2" pGuess="0.2" pSlip="0.1" opportunityCount="0" /><Skill name="determine-lcd" category="fraction-addition" label="Determine Lcd" description="Determine Lcd" pKnown="0.25" pLearn="0.2" pGuess="0.2" pSlip="0.1" opportunityCount="0" /><Skill name="multiply-denominators" category="fraction-addition" label="Multiply Denominators" description="Multiply Denominators" pKnown="0.25" pLearn="0.2" pGuess="0.2" pSlip="0.1" opportunityCount="0" /></Skills>';
       var tutorConfiguration = CTATGlobalFunctions.generateDefaultConfiguration ();
-      CTATGlobalFunctions.setTutorValue (tutorConfiguration,'question_file','http://localhost:8888/FSMTutor/FinalBRDs/SimpleButton1.brd');
+      CTATGlobalFunctions.setTutorValue (tutorConfiguration,'question_file','http://localhost:8888/FSMTutor/FinalBRDs/ComboBox1.brd');
       CTATGlobalFunctions.setTutorValue (tutorConfiguration,'skills',skills);
       CTATGlobalFunctions.setTutorValue (tutorConfiguration,'remoteSocketURL','localhost');
       CTATGlobalFunctions.setTutorValue (tutorConfiguration,'remoteSocketPort','8081');
@@ -123,6 +123,9 @@
         });
         commShell.highlightHandler(highlightHandler);
       });
+
+      window.actions = ['openList', 'highlightOption', 'selectOption', 'unhighlightOption', 'closeListWithoutSelection', 'removeOption', 'selectAll', 'noAction'];
+      window.events = ['click', 'moveOverOption', 'moveOutsideList', 'dragOption', 'rightClick'];
     </script>
   </head>
 
