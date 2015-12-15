@@ -14,6 +14,7 @@
 ;;
 
 (defrule create-state
+    (declare (salience 1))  ;come before set end state
     ?prob <- (problem (count-state ?cs)(total-state ?ts)(ie-states $? ?ie $?)(curr-states $?curr-s)(subGoal ?g&:(eq ?g nil)))
     (test (< ?cs ?ts))
     ?ie <- (interface-element (name ?sel)(value nil))
@@ -23,11 +24,12 @@
     (modify ?prob (count-state (+ ?cs 1))(curr-states (create$ ?curr-s ?sel)))
 	(construct-message
     "[ Is there anything else the interactor can do? ]"
-    "[ Create a new state ]"
+    "[ Try creating a new state ]"
+    "[ Click anywhere on the screen to create a new state ]"
     ))
 
 (defrule create-transition-1
-    (declare (salience 10))  
+    (declare (salience 10))  ;fill the transition where both states are paired first
     ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
@@ -43,10 +45,11 @@
     (construct-message
     "[ What events can happen in this state? ]"
     "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
+    "[ Click and drag the arrow from state" ?sel1 " to " ?sel2 ". ]"
     ))
 
 (defrule create-transition-2
-    (declare (salience 10))  
+    (declare (salience 9))  
     ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
@@ -63,10 +66,11 @@
     (construct-message
     "[ What events can happen in this state? ]"
     "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
+    "[ Click and drag the arrow from state" ?sel1 " to " ?sel2 ". ]"
     ))
 
 (defrule create-transition-3
-    (declare (salience 10))  
+    (declare (salience 8))  
     ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
@@ -83,25 +87,27 @@
     (construct-message
     "[ What events can happen in this state? ]"
     "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
+    "[ Click and drag the arrow from state" ?sel1 " to " ?sel2 ". ]"
     ))
 
-(defrule create-transition-4
-    (declare (salience 10))  
-    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
-    ?prob <- (problem (ie-states $? ?ie2 $?))
-    (test (neq ?ie1 ?ie2))
-    ?ie1 <- (interface-element (name ?sel1))
-    ?ie2 <- (interface-element (name ?sel2))
-    (not (state-pair (real-state ?rs1)(student-state ?sel1)))
-    (not (state-pair (real-state ?rs2)(student-state ?sel2)))
-    	=>
-    (predict ?sel1 UpdateList ?sel2)
-    (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
-    (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))
-    (construct-message
-    "[ What events can happen in this state? ]"
-    "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
-    ))
+;(defrule create-transition-4
+;    (declare (salience 10))  
+;    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
+;    ?prob <- (problem (ie-states $? ?ie2 $?))
+;    (test (neq ?ie1 ?ie2))
+;    ?ie1 <- (interface-element (name ?sel1))
+;    ?ie2 <- (interface-element (name ?sel2))
+;    (not (state-pair (real-state ?rs1)(student-state ?sel1)))
+;    (not (state-pair (real-state ?rs2)(student-state ?sel2)))
+;    	=>
+;    (predict ?sel1 UpdateList ?sel2)
+;    (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
+;    (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))
+;    (construct-message
+;    "[ What events can happen in this state? ]"
+;    "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
+;    "[ Click and drag the arrow from state" ?sel1 " to " ?sel2 ". ]"
+;    ))
 
 (defrule modify-event-1
     (declare (salience 20)) ;Events should be entered before actions for hints
@@ -215,7 +221,7 @@
     (modify ?t (action ?ac))
 	(construct-message
     "[ Check the interactor -- what is happening to cause this transtion? ]"
-    "[ The event is " ?ev ". ]"
+    "[ The action is " ?ac ". ]"
     ))
 
 (defrule transition-done
@@ -239,6 +245,7 @@
     (construct-message
     "[ Are there any transitions from this state? ]"
     "[ Set this state as an end state ]"
+    "[ Press 'e' when you hover the mouse on " ?s1 " ]"
     ))
 
 (defrule done
@@ -246,4 +253,16 @@
     (test (eq ?tc 0))
     =>
 	(predict done ButtonPressed -1)
-    )
+    (construct-message
+    "[ Make sure everything is correct ]"
+    "[ Congratulations, you're finished. Just click 'Done' Button :) ]"
+    ))
+
+(defrule BUG-too-many-state
+    ?prob <- (problem (count-state ?cs)(total-state ?ts)(subGoal ?g&:(eq ?g nil)))
+    (test (eq ?cs ?ts))
+    	=>
+    (predict ?sel UpdateText createState)
+	(construct-message
+    "[ You should have enough states, no need to create a new one. So try reusing the old one. ]"
+    ))
