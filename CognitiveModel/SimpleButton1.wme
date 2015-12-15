@@ -85,22 +85,22 @@
 (bind ?s5 (assert (interface-element (name State5))))
 
 ;;Events
-(bind ?e01 (assert (interface-element (name eventFrom0To1))))
-(bind ?e10 (assert (interface-element (name eventFrom1To0))))
-(bind ?e12 (assert (interface-element (name eventFrom1To2))))
-(bind ?e23 (assert (interface-element (name eventFrom2To3))))
-(bind ?e24 (assert (interface-element (name eventFrom2To4))))
-(bind ?e42 (assert (interface-element (name eventFrom4To2))))
-(bind ?e40 (assert (interface-element (name eventFrom4To5))))
+(bind ?e01 (assert (interface-element (name eventFromState0ToState1))))
+(bind ?e10 (assert (interface-element (name eventFromState1ToState0))))
+(bind ?e12 (assert (interface-element (name eventFromState1ToState2))))
+(bind ?e23 (assert (interface-element (name eventFromState2ToState3))))
+(bind ?e24 (assert (interface-element (name eventFromState2ToState4))))
+(bind ?e42 (assert (interface-element (name eventFromState4ToState2))))
+(bind ?e40 (assert (interface-element (name eventFromState4ToState5))))
 
 ;;Actions
-(bind ?a01 (assert (interface-element (name actionFrom0To1))))
-(bind ?a10 (assert (interface-element (name actionFrom1To0))))
-(bind ?a12 (assert (interface-element (name actionFrom1To2))))
-(bind ?a23 (assert (interface-element (name actionFrom2To3))))
-(bind ?a24 (assert (interface-element (name actionFrom2To4))))
-(bind ?a42 (assert (interface-element (name actionFrom4To2))))
-(bind ?a40 (assert (interface-element (name actionFrom4To5))))
+(bind ?a01 (assert (interface-element (name actionFromState0ToState1))))
+(bind ?a10 (assert (interface-element (name actionFromState1ToState0))))
+(bind ?a12 (assert (interface-element (name actionFromState1ToState2))))
+(bind ?a23 (assert (interface-element (name actionFromState2ToState3))))
+(bind ?a24 (assert (interface-element (name actionFromState2ToState4))))
+(bind ?a42 (assert (interface-element (name actionFromState4ToState2))))
+(bind ?a40 (assert (interface-element (name actionFromState4ToState5))))
 
 (bind ?prob (assert (problem
 		    (name SimpleButton)

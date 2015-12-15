@@ -256,6 +256,30 @@
             <y>2849</y>
         </dimension>
     </node>
+    <node locked="false" doneState="false">
+        <text>state48</text>
+        <uniqueID>49</uniqueID>
+        <dimension>
+            <x>78</x>
+            <y>1026</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state49</text>
+        <uniqueID>50</uniqueID>
+        <dimension>
+            <x>94</x>
+            <y>1147</y>
+        </dimension>
+    </node>
+    <node locked="false" doneState="false">
+        <text>state50</text>
+        <uniqueID>51</uniqueID>
+        <dimension>
+            <x>94</x>
+            <y>1257</y>
+        </dimension>
+    </node>
     <edge>
         <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
             <studentHintRequest></studentHintRequest>
@@ -307,7 +331,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -327,7 +351,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>eventFrom0To1</value>
+                        <value>eventFromState0ToState1</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -349,7 +373,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">eventFrom0To1</matcherParameter>
+                        <matcherParameter name="single">eventFromState0ToState1</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -367,7 +391,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -387,7 +411,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>actionFrom0To1</value>
+                        <value>actionFromState0ToState1</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -409,7 +433,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">actionFrom0To1</matcherParameter>
+                        <matcherParameter name="single">actionFromState0ToState1</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -427,7 +451,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -447,7 +471,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>eventFrom1To0</value>
+                        <value>eventFromState1ToState0</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -469,7 +493,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">eventFrom1To0</matcherParameter>
+                        <matcherParameter name="single">eventFromState1ToState0</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -487,7 +511,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -507,7 +531,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>actionFrom1To0</value>
+                        <value>actionFromState1ToState0</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -529,7 +553,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">actionFrom1To0</matcherParameter>
+                        <matcherParameter name="single">actionFromState1ToState0</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -547,7 +571,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -607,7 +631,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -627,7 +651,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>eventFrom1To2</value>
+                        <value>eventFromState1ToState2</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -644,12 +668,12 @@
             <callbackFn></callbackFn>
             <actionType>Correct Action</actionType>
             <oldActionType>Correct Action</oldActionType>
-            <checkedStatus>SUCCESS</checkedStatus>
+            <checkedStatus>NO-MODEL</checkedStatus>
             <matchers Concatenation="true">
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">eventFrom1To2</matcherParameter>
+                        <matcherParameter name="single">eventFromState1ToState2</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -667,7 +691,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -687,7 +711,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>actionFrom1To2</value>
+                        <value>actionFromState1ToState2</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -704,12 +728,12 @@
             <callbackFn></callbackFn>
             <actionType>Correct Action</actionType>
             <oldActionType>Correct Action</oldActionType>
-            <checkedStatus>SUCCESS</checkedStatus>
+            <checkedStatus>NO-MODEL</checkedStatus>
             <matchers Concatenation="true">
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">actionFrom1To2</matcherParameter>
+                        <matcherParameter name="single">actionFromState1ToState2</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -727,7 +751,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -787,7 +811,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -824,7 +848,7 @@
             <callbackFn></callbackFn>
             <actionType>Correct Action</actionType>
             <oldActionType>Correct Action</oldActionType>
-            <checkedStatus>SUCCESS</checkedStatus>
+            <checkedStatus>NO-MODEL</checkedStatus>
             <matchers Concatenation="true">
                 <Selection>
                     <matcher>
@@ -847,7 +871,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -867,7 +891,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>actionFrom2To3</value>
+                        <value>actionFromState2ToState3</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -889,7 +913,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">actionFrom2To3</matcherParameter>
+                        <matcherParameter name="single">actionFromState2ToState3</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -907,7 +931,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -967,7 +991,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1027,7 +1051,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1087,7 +1111,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1107,7 +1131,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>actionFrom2To4</value>
+                        <value>actionFromState2ToState4</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -1129,7 +1153,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">actionFrom2To4</matcherParameter>
+                        <matcherParameter name="single">actionFromState2ToState4</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -1147,7 +1171,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1207,7 +1231,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1244,7 +1268,7 @@
             <callbackFn></callbackFn>
             <actionType>Correct Action</actionType>
             <oldActionType>Correct Action</oldActionType>
-            <checkedStatus>SUCCESS</checkedStatus>
+            <checkedStatus>NO-MODEL</checkedStatus>
             <matchers Concatenation="true">
                 <Selection>
                     <matcher>
@@ -1267,7 +1291,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1287,7 +1311,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>eventFrom2To3</value>
+                        <value>eventFromState2ToState3</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -1309,7 +1333,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">eventFrom2To3</matcherParameter>
+                        <matcherParameter name="single">eventFromState2ToState3</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -1327,7 +1351,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1347,7 +1371,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>eventFrom2To4</value>
+                        <value>eventFromState2ToState4</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -1369,7 +1393,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">eventFrom2To4</matcherParameter>
+                        <matcherParameter name="single">eventFromState2ToState4</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -1387,7 +1411,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1447,7 +1471,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1507,7 +1531,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1567,7 +1591,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1587,7 +1611,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>eventFrom4To5</value>
+                        <value>eventFromState4ToState5</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -1609,7 +1633,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">eventFrom4To5</matcherParameter>
+                        <matcherParameter name="single">eventFromState4ToState5</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -1627,7 +1651,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1647,7 +1671,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>actionFrom4To5</value>
+                        <value>actionFromState4ToState5</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -1669,7 +1693,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">actionFrom4To5</matcherParameter>
+                        <matcherParameter name="single">actionFromState4ToState5</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -1687,7 +1711,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1747,7 +1771,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1767,7 +1791,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>eventFrom4To2</value>
+                        <value>eventFromState4ToState2</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -1789,7 +1813,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">eventFrom4To2</matcherParameter>
+                        <matcherParameter name="single">eventFromState4ToState2</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -1807,7 +1831,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1827,7 +1851,7 @@
                 <properties>
                     <MessageType>CorrectAction</MessageType>
                     <Selection>
-                        <value>actionFrom4To2</value>
+                        <value>actionFromState4ToState2</value>
                     </Selection>
                     <Action>
                         <value>UpdateComboBox</value>
@@ -1849,7 +1873,7 @@
                 <Selection>
                     <matcher>
                         <matcherType>ExactMatcher</matcherType>
-                        <matcherParameter name="single">actionFrom4To2</matcherParameter>
+                        <matcherParameter name="single">actionFromState4ToState2</matcherParameter>
                     </matcher>
                 </Selection>
                 <Action>
@@ -1867,7 +1891,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1927,7 +1951,7 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>SUCCESS</preCheckedStatus>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
@@ -1994,6 +2018,186 @@
         </rule>
         <sourceID>47</sourceID>
         <destID>48</destID>
+        <traversalCount>0</traversalCount>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>140</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>CorrectAction</MessageType>
+                    <Selection>
+                        <value>State4</value>
+                    </Selection>
+                    <Action>
+                        <value>UpdateText</value>
+                    </Action>
+                    <Input>
+                        <value>createState</value>
+                    </Input>
+                    <transaction_id>T8a4565b3-3bf1-4451-bc01-363b341c692e</transaction_id>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>NO-MODEL</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">State4</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">UpdateText</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">createState</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>17</sourceID>
+        <destID>49</destID>
+        <traversalCount>0</traversalCount>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>143</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>CorrectAction</MessageType>
+                    <Selection>
+                        <value>State2</value>
+                    </Selection>
+                    <Action>
+                        <value>UpdateList</value>
+                    </Action>
+                    <Input>
+                        <value>State4</value>
+                    </Input>
+                    <transaction_id>T043994bc-73bf-405f-9184-357d9b00b525</transaction_id>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>SUCCESS</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">State2</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">UpdateList</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">State4</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>49</sourceID>
+        <destID>50</destID>
+        <traversalCount>0</traversalCount>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>146</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>CorrectAction</MessageType>
+                    <Selection>
+                        <value>eventFromState2ToState4</value>
+                    </Selection>
+                    <Action>
+                        <value>UpdateComboBox</value>
+                    </Action>
+                    <Input>
+                        <value>mouseUp</value>
+                    </Input>
+                    <transaction_id>T043994bc-73bf-405f-9184-357d9b00b525</transaction_id>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <hintMessage>Please provide your answer 'No_Value' in the highlighted element.</hintMessage>
+            <callbackFn></callbackFn>
+            <actionType>Correct Action</actionType>
+            <oldActionType>Correct Action</oldActionType>
+            <checkedStatus>NO-MODEL</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">eventFromState2ToState4</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">UpdateComboBox</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">mouseUp</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>No-Applicable</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>50</sourceID>
+        <destID>51</destID>
         <traversalCount>0</traversalCount>
     </edge>
     <EdgesGroups ordered="false"></EdgesGroups>

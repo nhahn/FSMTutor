@@ -98,7 +98,7 @@
     (test (eq ?rs2 ?rrs2))
     
     	=>
-    (bind ?sel (str-cat "eventFrom" ?rs1 "To" ?rs2))
+    (bind ?sel (str-cat "eventFrom" ?s1 "To" ?s2))
     (predict ?sel UpdateComboBox ?ev)
     (modify ?t (event ?ev))
     (modify ?sp2 (student-state ?s2))
@@ -117,7 +117,7 @@
     (test (eq ?rs1 ?rrs1))
     
     	=>
-    (bind ?sel (str-cat "eventFrom" ?rs1 "To" ?rs2))
+    (bind ?sel (str-cat "eventFrom" ?s1 "To" ?s2))
     (predict ?sel UpdateComboBox ?ev)
     (modify ?t (event ?ev))
     (modify ?sp1 (student-state ?s1))
@@ -136,7 +136,7 @@
     (test (eq ?rs2 ?rrs2))
     
     	=>
-    (bind ?sel (str-cat "actionFrom" ?rs1 "To" ?rs2))
+    (bind ?sel (str-cat "actionFrom" ?s1 "To" ?s2))
     (predict ?sel UpdateComboBox ?ac)
     (modify ?t (action ?ac))
     (modify ?sp2 (student-state ?s2))
@@ -155,7 +155,7 @@
     (test (eq ?rs1 ?rrs1))
     
     	=>
-    (bind ?sel (str-cat "actionFrom" ?rs1 "To" ?rs2))
+    (bind ?sel (str-cat "actionFrom" ?s1 "To" ?s2))
     (predict ?sel UpdateComboBox ?ac)
     (modify ?t (action ?ac))
     (modify ?sp1 (student-state ?s1))
