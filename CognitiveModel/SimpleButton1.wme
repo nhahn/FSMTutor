@@ -108,6 +108,7 @@
 		    (count-state 1) ;Start with only start state
             (end-state 3 5)
             (curr-states State0)
+            (transition-count 7)
 		    (ie-states ?s0 ?s1 ?s2 ?s3 ?s4 ?s5)
 		    (ie-events ?e01 ?e10 ?e12 ?e23 ?e24 ?e42 ?e40)
 		    (ie-actions ?a01 ?a10 ?a12 ?a23 ?a24 ?a42 ?a40)

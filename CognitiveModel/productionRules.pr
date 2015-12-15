@@ -165,13 +165,14 @@
     ))
 
 (defrule transition-done
-    ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac)))
+    ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac))(transition-count ?tc))
     ?prob <- (problem (curr-transitions $?ct))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(event ?ev)(action ?ac)) ;current transition
     (test (and (neq ?ev nil)(neq ?ac nil)))
     	=>
     (bind ?tmp (create$ ?t))
-    (modify ?prob (curr-transitions (complement$ ?ct ?tmp))(subGoal nil))
+    (bind ?nt (- ?tc 1))
+    (modify ?prob (curr-transitions (complement$ ?ct ?tmp))(subGoal nil)(transition-count ?nt))
     
     )
 
@@ -181,4 +182,11 @@
     
     	=>
     (predict ?s1 UpdateText End)
+    )
+
+(defrule done
+    (problem (transition-count ?tc))
+    (test (eq ?tc 0))
+    =>
+	(predict done ButtonPressed -1)
     )

@@ -28,6 +28,7 @@
     (slot subGoal)
     (slot total-state)
     (slot count-state)
+    (slot transition-count)
     (multislot curr-transitions)
     (multislot curr-states)
     (multislot end-state)
