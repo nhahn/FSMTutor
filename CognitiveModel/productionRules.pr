@@ -28,7 +28,7 @@
     ))
 
 (defrule create-transition-1
-    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct))
+    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
     ?ie1 <- (interface-element (name ?sel1))
@@ -39,11 +39,11 @@
     	=>
     (predict ?sel1 UpdateList ?sel2)
     (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
-    (modify ?prob (curr-transitions (create$ ?ct ?t)))
+    (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))
     )
 
 (defrule create-transition-2
-    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct))
+    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
     ?ie1 <- (interface-element (name ?sel1))
@@ -55,11 +55,11 @@
     	=>
     (predict ?sel1 UpdateList ?sel2)
     (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
-    (modify ?prob (curr-transitions (create$ ?ct ?t)))    
+    (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))    
     )
 
 (defrule create-transition-3
-    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct))
+    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
     ?ie1 <- (interface-element (name ?sel1))
@@ -71,11 +71,11 @@
     	=>
     (predict ?sel1 UpdateList ?sel2)
     (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
-    (modify ?prob (curr-transitions (create$ ?ct ?t)))
+    (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))
     )
 
 (defrule create-transition-4
-    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct))
+    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
     ?ie1 <- (interface-element (name ?sel1))
@@ -85,11 +85,11 @@
     	=>
     (predict ?sel1 UpdateList ?sel2)
     (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
-    (modify ?prob (curr-transitions (create$ ?ct ?t)))
+    (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))
     )
 
 (defrule modify-event-1
-    ?prob <- (problem (curr-transitions $? ?t $?))
+    ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac)))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(event nil)) ;current transition
     ?sp1 <- (state-pair (student-state ?s1)(real-state ?rs1))
     (test (neq ?rs1 nil))
@@ -108,7 +108,7 @@
     ))
 
 (defrule modify-event-2
-    ?prob <- (problem (curr-transitions $? ?t $?))
+    ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac)))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(event nil)) ;current transition
     ?sp2 <- (state-pair (student-state ?s2)(real-state ?rs2))
     (test (neq ?rs2 nil))
@@ -127,7 +127,7 @@
     ))
 
 (defrule modify-action-1
-    ?prob <- (problem (curr-transitions $? ?t $?))
+    ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac)))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(action nil)) ;current transition
     ?sp1 <- (state-pair (student-state ?s1)(real-state ?rs1))
     (test (neq ?rs1 nil))
@@ -146,7 +146,7 @@
     ))
 
 (defrule modify-action-2
-    ?prob <- (problem (curr-transitions $? ?t $?))
+    ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac)))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(action nil)) ;current transition
     ?sp2 <- (state-pair (student-state ?s2)(real-state ?rs2))
     (test (neq ?rs2 nil))
@@ -163,14 +163,15 @@
     "[ Check the interactor -- what is happening when you " ?ev "? ]"
     "[ The action is " ?ac ". ]"
     ))
+
 (defrule transition-done
-    ?prob <- (problem (curr-transitions $? ?t $?))
+    ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac)))
     ?prob <- (problem (curr-transitions $?ct))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(event ?ev)(action ?ac)) ;current transition
     (test (and (neq ?ev nil)(neq ?ac nil)))
     	=>
     (bind ?tmp (create$ ?t))
-    (modify ?prob (curr-transitions (complement$ ?ct ?tmp)))
+    (modify ?prob (curr-transitions (complement$ ?ct ?tmp))(subGoal nil))
     
     )
 
