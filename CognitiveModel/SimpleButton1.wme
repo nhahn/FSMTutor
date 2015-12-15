@@ -35,9 +35,9 @@
             )))
 (bind ?t5 (assert (transition
             (prev-state 4)
-            (next-state 0)
+            (next-state 5)
             (event mouseUp)
-            (action unhighlightButton)
+            (action noAction)
             )))
 (bind ?t6 (assert (transition
             (prev-state 4)
@@ -71,12 +71,18 @@
             (real-state 4)
             )))
 
+(bind ?sp4 (assert (state-pair
+            (student-state nil)
+            (real-state 5)
+            )))
+
 ;; States
 (bind ?s0 (assert (interface-element (name State0)(value binded))))
 (bind ?s1 (assert (interface-element (name State1))))
 (bind ?s2 (assert (interface-element (name State2))))
 (bind ?s3 (assert (interface-element (name State3))))
 (bind ?s4 (assert (interface-element (name State4))))
+(bind ?s5 (assert (interface-element (name State5))))
 
 ;;Events
 (bind ?e01 (assert (interface-element (name eventFrom0To1))))
@@ -85,7 +91,7 @@
 (bind ?e23 (assert (interface-element (name eventFrom2To3))))
 (bind ?e24 (assert (interface-element (name eventFrom2To4))))
 (bind ?e42 (assert (interface-element (name eventFrom4To2))))
-(bind ?e40 (assert (interface-element (name eventFrom4To0))))
+(bind ?e40 (assert (interface-element (name eventFrom4To5))))
 
 ;;Actions
 (bind ?a01 (assert (interface-element (name actionFrom0To1))))
@@ -94,15 +100,15 @@
 (bind ?a23 (assert (interface-element (name actionFrom2To3))))
 (bind ?a24 (assert (interface-element (name actionFrom2To4))))
 (bind ?a42 (assert (interface-element (name actionFrom4To2))))
-(bind ?a40 (assert (interface-element (name actionFrom4To0))))
+(bind ?a40 (assert (interface-element (name actionFrom4To5))))
 
 (bind ?prob (assert (problem
 		    (name SimpleButton)
-		    (total-state 5)
+		    (total-state 6)
 		    (count-state 1) ;Start with only start state
-            (end-state 3)
+            (end-state 3 5)
             (curr-states State0)
-		    (ie-states ?s0 ?s1 ?s2 ?s3 ?s4)
+		    (ie-states ?s0 ?s1 ?s2 ?s3 ?s4 ?s5)
 		    (ie-events ?e01 ?e10 ?e12 ?e23 ?e24 ?e42 ?e40)
 		    (ie-actions ?a01 ?a10 ?a12 ?a23 ?a24 ?a42 ?a40)
     		)))

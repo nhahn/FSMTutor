@@ -176,7 +176,7 @@
     )
 
 (defrule set-end-state
-    ?prob <- (problem (end-state ?es))
+    ?prob <- (problem (end-state $? ?es $?))
     ?sp <- (state-pair (real-state ?es)(student-state ?s1))
     
     	=>
