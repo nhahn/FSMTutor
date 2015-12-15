@@ -165,7 +165,7 @@ function restart() {
       if (d.event || d.action) return;
       $("#transitionEvent").html("Event <div class='CTATComboBox'></div>")
       var event = $("#transitionEvent div")
-      event.attr("id", "eventFrom"+d.source.id+"To"+d.target.id);
+      event.attr("id", "eventFromState"+d.source.id+"ToState"+d.target.id);
       event.append($("<option></option>").attr("value", "").text("Select an Event"));
       $.each(['mouseDown', 'mouseUp', 'mouseMoveOutside', 'mouseMoveInside'], function(key, value) {   
         event.append($("<option></option>")
@@ -175,7 +175,7 @@ function restart() {
       addCTATElement(event[0]);
       $("#transitionAction").html("Action <div class='CTATComboBox'></div>")
       var action = $("#transitionAction div")
-      action.attr("id", "actionFrom"+d.source.id+"To"+d.target.id);
+      action.attr("id", "actionFromState"+d.source.id+"ToState"+d.target.id);
       action.append($("<option></option>").attr("value", "").text("Select an Action"));
       $.each(['highlightButton', 'noAction', 'performButtonAction', 'unhighlightButton', 'depressedButton', 'undepressedButton'], function(key, value) {   
         action.append($("<option></option>")
@@ -185,9 +185,9 @@ function restart() {
       addCTATElement(action[0]);
       $('#transitionModal').foundation('open');
     }).on('mouseover', function(d) {
-      d3.select(this).style('stroke-width', '6px');
+      d3.select(this).style('stroke-width', '6px').style('cursor', 'pointer');
     }).on('mouseout', function(d) {
-      d3.select(this).style('stroke-width', '4px');
+      d3.select(this).style('stroke-width', '4px').style('cursor', 'default');
     });
 
   linktext_event = linktext_event.data(force.links().filter(function(d) { return d.event}));
@@ -524,7 +524,7 @@ function gradingFix(selection, action, input) {
 function processCorrect(selection, action, input) {
   switch (action) {
     case 'UpdateComboBox':
-      var match = /(action|event)From(\d+)To(\d+)/.exec(selection);
+      var match = /(action|event)FromState(\d+)ToState(\d+)/.exec(selection);
       if (match != null) {
         var link = findLinkById(parseInt(match[2]), parseInt(match[3]));
         link[match[1]] = input;
@@ -551,7 +551,7 @@ function highlightHandler(shouldHighlight, message) {
       console.log("not sure what to do here");
       break;
     case 'UpdateComboBox':
-      var match = /(action|event)From(\d+)To(\d+)/.exec(message.getSelection());
+      var match = /(action|event)FromState(\d+)ToState(\d+)/.exec(message.getSelection());
       if (match != null) {
         highlight = findLinkById(parseInt(match[2]), parseInt(match[3]));
         restart();
