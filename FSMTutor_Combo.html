@@ -142,8 +142,12 @@
     <div id="container">
       <div class="row">
         <div class="medium-4 columns">
-          <p>For this problem, you will be trying to model the FSM of a button interactor. A button is provided below for you to test with.</p>
-          <a id="testButton" class="button" type="button" tabindex="-1">Test Button</a>
+          <p>For this problem, you will be trying to model the FSM of a combo box interactor. A combo box is provided below for you to test with.</p>
+          <select id="testButton" tabindex="-1">
+            <option>Combo Box</option>
+            <option>Option 1</option>
+            <option>Option 2</option>
+          </select>
           <span id="testOutput" style="display: none">Button Pressed!</span>
           <script>$("#testButton").click(function() { $("#testOutput").show().delay(1000).fadeOut() })</script>
           <p>
