@@ -166,15 +166,20 @@ function restart() {
       //This is when we add a model to assign an event
       d3.event.stopPropagation();
       if(frozen) return;
-      if (d.event || d.action) return;
+      if (d.event && d.action) return;
       $("#transitionEvent").html("Event <div class='CTATComboBox'></div>")
       var event = $("#transitionEvent div")
       event.attr("id", "eventFromState"+d.source.id+"ToState"+d.target.id);
       event.append($("<option></option>").attr("value", "").text("Select an Event"));
-      $.each(window.events, function(key, value) {   
-        event.append($("<option></option>")
+      $.each(window.events, function(key, value) {  
+        option = $("<option></option>")
          .attr("value",value)
-         .text(value)); 
+         .text(value);
+       if (d.event == value) {
+         option.attr("selected","");
+         event.attr("disabled","");
+       }
+       event.append(option);
       });
       addCTATElement(event[0]);
       $("#transitionAction").html("Action <div class='CTATComboBox'></div>")
@@ -182,9 +187,14 @@ function restart() {
       action.attr("id", "actionFromState"+d.source.id+"ToState"+d.target.id);
       action.append($("<option></option>").attr("value", "").text("Select an Action"));
       $.each(window.actions, function(key, value) {   
-        action.append($("<option></option>")
+        option = $("<option></option>")
          .attr("value",value)
-         .text(value)); 
+         .text(value);
+       if (d.event == value) {
+         option.attr("selected","");
+         action.attr("disabled","");
+       }
+       action.append(option);
       });
       addCTATElement(action[0]);
       $('#transitionModal').foundation('open');
