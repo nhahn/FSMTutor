@@ -21,6 +21,7 @@
     (slot action)
     (slot prev-state)
     (slot next-state)
+    (slot filled)
     )
 
 (deftemplate problem

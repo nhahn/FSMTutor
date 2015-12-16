@@ -30,65 +30,74 @@
 
 (defrule create-transition-1
     (declare (salience 10))  ;fill the transition where both states are paired first
-    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
+    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil))(curr-states $?cs))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
     ?ie1 <- (interface-element (name ?sel1))
     ?ie2 <- (interface-element (name ?sel2))
     ?sp1 <- (state-pair (real-state ?rs1)(student-state ?sel1))
     ?sp2 <- (state-pair (real-state ?rs2)(student-state ?sel2))
-    ?tr <- (transition (prev-state ?rs1)(next-state ?rs2))
+    ?tr <- (transition (prev-state ?rs1)(next-state ?rs2)(event ?ev)(filled nil))
+    (test (member$ ?sel1 ?cs))
+    (test (member$ ?sel2 ?cs))
     	=>
     (predict ?sel1 UpdateList ?sel2)
     (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
     (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))
     (construct-message
-    "[ What events can happen in this state? ]"
+    "[ What event(s) can happen in this state("?sel1")? ]"
+    "[ If " ?ev " occured at this state, what would happen?]"
     "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
     "[ Click and drag the arrow from state" ?sel1 " to " ?sel2 ". ]"
     ))
 
 (defrule create-transition-2
     (declare (salience 9))  
-    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
+    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil))(curr-states $?cs))
     ?prob <- (problem (ie-states $? ?ie2 $?))
     (test (neq ?ie1 ?ie2))
     ?ie1 <- (interface-element (name ?sel1))
     ?ie2 <- (interface-element (name ?sel2))
     ?sp1 <- (state-pair (real-state ?rs1)(student-state ?sel1))
     (not (state-pair (real-state ?rs2)(student-state ?sel2)))
-    ?tr <- (transition (prev-state ?rs1)(next-state ?ns))
+    ?tr <- (transition (prev-state ?rs1)(next-state ?ns)(event ?ev)(filled nil))
     ?spc <- (state-pair (real-state ?ns)(student-state ?ss&:(eq ?ss nil)))
+    (test (member$ ?sel1 ?cs))
+    (test (member$ ?sel2 ?cs))
     	=>
     (predict ?sel1 UpdateList ?sel2)
     (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
     (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))    
     (construct-message
-    "[ What events can happen in this state? ]"
+    "[ What event(s) can happen in this state("?sel1")? ]"
+    "[ If " ?ev " occured at this state, what would happen?]"
     "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
     "[ Click and drag the arrow from state" ?sel1 " to " ?sel2 ". ]"
     ))
 
-(defrule create-transition-3
-    (declare (salience 8))  
-    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil)))
-    ?prob <- (problem (ie-states $? ?ie2 $?))
-    (test (neq ?ie1 ?ie2))
-    ?ie1 <- (interface-element (name ?sel1))
-    ?ie2 <- (interface-element (name ?sel2))
-    ?sp2 <- (state-pair (real-state ?rs2)(student-state ?sel2))
-    (not (state-pair (real-state ?rs1)(student-state ?sel1)))
-    ?tr <- (transition (prev-state ?rs2)(next-state ?ns))
-    ?spc <- (state-pair (real-state ?ns)(student-state ?ss&:(eq ?ss nil)))
-    	=>
-    (predict ?sel1 UpdateList ?sel2)
-    (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
-    (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))
-    (construct-message
-    "[ What events can happen in this state? ]"
-    "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
-    "[ Click and drag the arrow from state" ?sel1 " to " ?sel2 ". ]"
-    ))
+;(defrule create-transition-3
+;    (declare (salience 8))  
+;    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil))(curr-states $?cs))
+;    ?prob <- (problem (ie-states $? ?ie2 $?))
+;    (test (neq ?ie1 ?ie2))
+;    ?ie1 <- (interface-element (name ?sel1))
+;    ?ie2 <- (interface-element (name ?sel2))
+;    ?sp2 <- (state-pair (real-state ?rs2)(student-state ?sel2))
+;    (not (state-pair (real-state ?rs1)(student-state ?sel1)))
+;    ?tr <- (transition (prev-state ?rs2)(next-state ?ns)(event ?ev))
+;    ?spc <- (state-pair (real-state ?ns)(student-state ?ss&:(eq ?ss nil)))
+;    (test (member$ ?sel1 ?cs))
+;    (test (member$ ?sel2 ?cs))
+;    	=>
+;    (predict ?sel1 UpdateList ?sel2)
+;    (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
+;    (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))
+;	(construct-message
+;    "[ What event(s) can happen to transition to state(" ?sel2 ")? ]"
+;    "[ If " ?ev " occured, what would happen?]"
+;    "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
+;    "[ Click and drag the arrow from state" ?sel1 " to " ?sel2 ". ]"
+;    ))
 
 ;(defrule create-transition-4
 ;    (declare (salience 10))  
@@ -228,20 +237,26 @@
     ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac))(transition-count ?tc))
     ?prob <- (problem (curr-transitions $?ct))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(event ?ev)(action ?ac)) ;current transition
+    ?sp1 <- (state-pair (real-state ?rs1)(student-state ?s1))
+    ?sp2 <- (state-pair (real-state ?rs2)(student-state ?s2))
+    ?rt <- (transition (prev-state ?rs1)(next-state ?rs2)(event ?ev)(action ?ac))
     (test (and (neq ?ev nil)(neq ?ac nil)))
     	=>
     (bind ?tmp (create$ ?t))
     (bind ?nt (- ?tc 1))
-    (modify ?prob (curr-transitions (complement$ ?ct ?tmp))(subGoal nil)(transition-count ?nt))
-    
+    (modify ?prob (curr-transitions (complement$ ?tmp ?ct))(subGoal nil)(transition-count ?nt))
+    (modify ?rt (filled TRUE))
     )
 
 (defrule set-end-state
     ?prob <- (problem (end-state $? ?es $?)(subGoal ?g&:(eq ?g nil)))
+    ?prob <- (problem (end-state $?esl))
     ?sp <- (state-pair (real-state ?es)(student-state ?s1))
     
     	=>
     (predict ?s1 UpdateText End)
+    (bind ?tmp (create$ ?es))
+    (modify ?prob (end-state (complement$ ?tmp ?esl)))
     (construct-message
     "[ Are there any transitions from this state? ]"
     "[ Set this state as an end state ]"
@@ -249,8 +264,11 @@
     ))
 
 (defrule done
-    (problem (transition-count ?tc))
+    (declare (salience -20))  
+    (problem (transition-count ?tc)(end-state $?esl))
     (test (eq ?tc 0))
+    (test (eq (length$ ?esl) 0))
+    ;(test )
     =>
 	(predict done ButtonPressed -1)
     (construct-message
