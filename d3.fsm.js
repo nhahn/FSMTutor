@@ -488,7 +488,7 @@ function keydown() {
   switch(d3.event.keyCode) {
     case 8: // backspace
     case 46: // delete
-      if (selected_node.end) {
+      if (selected_node && selected_node.end) {
         circle.data(nodes.filter(function(d) { return d.id == selected_node.id}), 
             function(d) { return d.id}).selectAll('.outer').remove()
         selected_node.end = false;
