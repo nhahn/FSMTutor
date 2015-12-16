@@ -95,7 +95,7 @@
         list-style: none;
       }
 
-      article li a {
+      article li span {
         text-decoration: none;
         color: #000;
         margin: 10px;
@@ -114,10 +114,6 @@
 
       *:-khtml-drag {
         background-color: rgba(238,238,238, 0.5);
-      }
-
-      article li a:hover:after {
-        content: ' (drag me)';
       }
 
       article ul {
@@ -210,10 +206,10 @@
           <article>
             <div id="bin" class=""><p style="opacity: 0;">burp!</p></div>
             <ul class="draggable">
-              <li><a href="#" id="two" draggable="true">two</a></li>
-              <li><a href="#" id="three" draggable="true">three</a></li>
-              <li><a href="#" id="four" draggable="true">four</a></li>
-              <li><a href="#" id="five" draggable="true">five</a></li>
+              <li><span id="two" draggable="true">two</span></li>
+              <li><span id="three" draggable="true">three</span></li>
+              <li><span id="four" draggable="true">four</span></li>
+              <li><span id="five" draggable="true">five</span></li>
             </ul>
           </article>
           <script>
@@ -222,7 +218,7 @@
             var msie = /*@cc_on!@*/0;
             yum.style.opacity = 1;
 
-            var links = document.querySelectorAll('.draggable li > a'), el = null;
+            var links = document.querySelectorAll('.draggable li > span'), el = null;
             for (var i = 0; i < links.length; i++) {
               el = links[i];
 
@@ -290,7 +286,7 @@
             You can also reposition the nodes to make it easier to make your graph. Hold down the 'Control' key and drag a node to fix its position.
           </p>
           <p>
-            To make a state and end state, highlight it and press the 'E' button on your keyboard. 
+            To make a state and end state, hover over it and press the 'E' button on your keyboard. 
           </p>
         </div>
         <div class="medium-8 columns">

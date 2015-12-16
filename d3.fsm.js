@@ -461,6 +461,15 @@ function keydown() {
   }
   
   if(hover_node && d3.event.keyCode === 69 ) {
+    if (frozen) {
+      circle.data(nodes.filter(function(d) { return d.id == selected_node.id}), 
+            function(d) { return d.id}).selectAll('.outer').remove()
+      selected_node.end = false;
+      selected_node = null;
+      clearFrozen();
+      restart();
+      return;
+    }
     if (hover_node.end) return;
     hover_node.end = true;
     //Add in our finalSates
@@ -479,7 +488,13 @@ function keydown() {
   switch(d3.event.keyCode) {
     case 8: // backspace
     case 46: // delete
-      if(selected_node) {
+      if (selected_node.end) {
+        circle.data(nodes.filter(function(d) { return d.id == selected_node.id}), 
+            function(d) { return d.id}).selectAll('.outer').remove()
+        selected_node.end = false;
+        clearFrozen();
+      }
+      else if(selected_node) {
         nodes.splice(nodes.indexOf(selected_node), 1);
         spliceLinksForNode(selected_node);
         lastNodeId--; //We only delete on error (so it is safe to decriment this)

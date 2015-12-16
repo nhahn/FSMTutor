@@ -13,7 +13,7 @@
             (prev-state 1)
             (next-state 0)
             (event mouseUp)
-            (action moveBack)
+            (action reset)
             )))
 (bind ?t2 (assert (transition
             (prev-state 1)
