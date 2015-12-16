@@ -32,7 +32,7 @@
     (declare (salience 10))  ;fill the transition where both states are paired first
     ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil))(curr-states $?cs))
     ?prob <- (problem (ie-states $? ?ie2 $?))
-    (test (neq ?ie1 ?ie2))
+    ;(test (neq ?ie1 ?ie2))
     ?ie1 <- (interface-element (name ?sel1))
     ?ie2 <- (interface-element (name ?sel2))
     ?sp1 <- (state-pair (real-state ?rs1)(student-state ?sel1))
@@ -55,7 +55,7 @@
     (declare (salience 9))  
     ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil))(curr-states $?cs))
     ?prob <- (problem (ie-states $? ?ie2 $?))
-    (test (neq ?ie1 ?ie2))
+    ;(test (neq ?ie1 ?ie2))
     ?ie1 <- (interface-element (name ?sel1))
     ?ie2 <- (interface-element (name ?sel2))
     ?sp1 <- (state-pair (real-state ?rs1)(student-state ?sel1))
@@ -258,7 +258,7 @@
     (bind ?tmp (create$ ?es))
     (modify ?prob (end-state (complement$ ?tmp ?esl)))
     (construct-message
-    "[ Are there any transitions from this state? ]"
+    "[ Are there any transitions from this state("?s1")? ]"
     "[ Set this state as an end state ]"
     "[ Press 'e' when you hover the mouse on " ?s1 " ]"
     ))

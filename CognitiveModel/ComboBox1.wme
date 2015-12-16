@@ -31,7 +31,7 @@
             (prev-state 2)
             (next-state 0)
             (event click)
-            (action closeList)
+            (action closeListWithoutSelection)
             )))
 
 
