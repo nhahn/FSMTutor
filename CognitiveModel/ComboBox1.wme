@@ -23,7 +23,7 @@
             )))
 (bind ?t3 (assert (transition
             (prev-state 1)
-            (next-state 2)
+            (next-state 3)
             (event moveOutsideList)
             (action unhighlightOption)
             )))
@@ -83,7 +83,7 @@
             (end-state 2)
             (curr-states State0)
             (transition-count 5)
-		    (ie-states ?s0 ?s1 ?s2)
+		    (ie-states ?s0 ?s1 ?s2 ?s3)
 		    (ie-events ?e01 ?e10 ?e12 ?e23 ?e24)
 		    (ie-actions ?a01 ?a10 ?a12 ?a23 ?a24)
     		)))
