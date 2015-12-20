@@ -28,7 +28,7 @@
             (action unhighlightOption)
             )))
 (bind ?t4 (assert (transition
-            (prev-state 2)
+            (prev-state 3)
             (next-state 0)
             (event click)
             (action closeListWithoutSelection)

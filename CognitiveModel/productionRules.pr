@@ -75,29 +75,29 @@
     "[ Click and drag the arrow from state" ?sel1 " to " ?sel2 ". ]"
     ))
 
-;(defrule create-transition-3
-;    (declare (salience 8))  
-;    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil))(curr-states $?cs))
-;    ?prob <- (problem (ie-states $? ?ie2 $?))
-;    (test (neq ?ie1 ?ie2))
-;    ?ie1 <- (interface-element (name ?sel1))
-;    ?ie2 <- (interface-element (name ?sel2))
-;    ?sp2 <- (state-pair (real-state ?rs2)(student-state ?sel2))
-;    (not (state-pair (real-state ?rs1)(student-state ?sel1)))
-;    ?tr <- (transition (prev-state ?rs2)(next-state ?ns)(event ?ev))
-;    ?spc <- (state-pair (real-state ?ns)(student-state ?ss&:(eq ?ss nil)))
-;    (test (member$ ?sel1 ?cs))
-;    (test (member$ ?sel2 ?cs))
-;    	=>
-;    (predict ?sel1 UpdateList ?sel2)
-;    (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
-;    (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))
-;	(construct-message
-;    "[ What event(s) can happen to transition to state(" ?sel2 ")? ]"
-;    "[ If " ?ev " occured, what would happen?]"
-;    "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
-;    "[ Click and drag the arrow from state" ?sel1 " to " ?sel2 ". ]"
-;    ))
+(defrule create-transition-3
+    (declare (salience 8))  
+    ?prob <- (problem (ie-states $? ?ie1 $?)(curr-transitions $?ct)(subGoal ?g&:(eq ?g nil))(curr-states $?cs))
+    ?prob <- (problem (ie-states $? ?ie2 $?))
+    ;(test (neq ?ie1 ?ie2))
+    ?ie1 <- (interface-element (name ?sel1))
+    ?ie2 <- (interface-element (name ?sel2))
+    ?sp2 <- (state-pair (real-state ?rs2)(student-state ?sel2))
+    (not (state-pair (real-state ?rs1)(student-state ?sel1)))
+    ?tr <- (transition (prev-state ?rs2)(next-state ?ns)(event ?ev))
+    ?spc <- (state-pair (real-state ?ns)(student-state ?ss&:(eq ?ss nil)))
+    (test (member$ ?sel1 ?cs))
+    (test (member$ ?sel2 ?cs))
+    	=>
+    (predict ?sel1 UpdateList ?sel2)
+    (bind ?t (assert (transition (prev-state ?sel1)(next-state ?sel2))))
+    (modify ?prob (curr-transitions (create$ ?ct ?t))(subGoal fill-ev-ac))
+	(construct-message
+    "[ What event(s) can happen to transition to state(" ?sel2 ")? ]"
+    "[ If " ?ev " occured, what would happen?]"
+    "[ Create a transition from state" ?sel1 " to " ?sel2 ". ]"
+    "[ Click and drag the arrow from state" ?sel1 " to " ?sel2 ". ]"
+    ))
 
 ;(defrule create-transition-4
 ;    (declare (salience 10))  
@@ -308,8 +308,8 @@
     ?prob <- (problem (curr-transitions $? ?t $?)(subGoal ?g&:(eq ?g fill-ev-ac)))
     ?t <- (transition (prev-state ?s1)(next-state ?s2)(event nil)) ;current transition
     ?sp1 <- (state-pair (student-state ?s1)(real-state ?rs1))
-    ?sp2 <- (state-pair (student-state ?s2)(real-state ?rs2))
-    (not (transition (prev-state ?rs1)(next-state ?rs2)(event ?ev)))
+    ;?sp2 <- (state-pair (student-state ?s2)(real-state ?rs2))
+    ;(not (transition (prev-state ?rs1)(next-state ?rs2)(event ?ev)))
     ?rt <- (transition (prev-state ?rs1)(next-state ?rs1)(event ?ev))
     
     	=>
@@ -319,6 +319,7 @@
     "[ Shouldn't this be a loop? ]"
     "[ The event is " ?ev ". ]"
     ))
+
 
 ;(defrule create-transition-3
 ;    (declare (salience 8))  

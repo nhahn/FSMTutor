@@ -264,6 +264,14 @@
             <y>2731</y>
         </dimension>
     </node>
+    <node locked="false" doneState="false">
+        <text>state56</text>
+        <uniqueID>57</uniqueID>
+        <dimension>
+            <x>298</x>
+            <y>2126</y>
+        </dimension>
+    </node>
     <edge>
         <actionLabel preferPathMark="true" minTraversals="1" maxTraversals="1">
             <studentHintRequest></studentHintRequest>
@@ -2031,7 +2039,7 @@
             <callbackFn></callbackFn>
             <actionType>Buggy Action</actionType>
             <oldActionType>Buggy Action</oldActionType>
-            <checkedStatus>NO-MODEL</checkedStatus>
+            <checkedStatus>BUG</checkedStatus>
             <matchers Concatenation="true">
                 <Selection>
                     <matcher>
@@ -2054,13 +2062,72 @@
                 <Actor linkTriggered="false">Student</Actor>
             </matchers>
         </actionLabel>
-        <preCheckedStatus>NO-MODEL</preCheckedStatus>
+        <preCheckedStatus>BUG</preCheckedStatus>
         <rule>
             <text>unnamed</text>
             <indicator>-1</indicator>
         </rule>
         <sourceID>47</sourceID>
         <destID>55</destID>
+        <traversalCount>0</traversalCount>
+    </edge>
+    <edge>
+        <actionLabel preferPathMark="false" minTraversals="1" maxTraversals="1">
+            <studentHintRequest></studentHintRequest>
+            <stepSuccessfulCompletion></stepSuccessfulCompletion>
+            <stepStudentError></stepStudentError>
+            <uniqueID>163</uniqueID>
+            <message>
+                <verb>SendNoteProperty</verb>
+                <properties>
+                    <MessageType>CorrectAction</MessageType>
+                    <Selection>
+                        <value>State4</value>
+                    </Selection>
+                    <Action>
+                        <value>UpdateList</value>
+                    </Action>
+                    <Input>
+                        <value>State2</value>
+                    </Input>
+                    <transaction_id>T043994bc-73bf-405f-9184-357d9b00b525</transaction_id>
+                </properties>
+            </message>
+            <buggyMessage>No, this is not correct.</buggyMessage>
+            <successMessage></successMessage>
+            <callbackFn></callbackFn>
+            <actionType>Buggy Action</actionType>
+            <oldActionType>Buggy Action</oldActionType>
+            <checkedStatus>BUG</checkedStatus>
+            <matchers Concatenation="true">
+                <Selection>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">State4</matcherParameter>
+                    </matcher>
+                </Selection>
+                <Action>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">UpdateList</matcherParameter>
+                    </matcher>
+                </Action>
+                <Input>
+                    <matcher>
+                        <matcherType>ExactMatcher</matcherType>
+                        <matcherParameter name="single">State2</matcherParameter>
+                    </matcher>
+                </Input>
+                <Actor linkTriggered="false">Student</Actor>
+            </matchers>
+        </actionLabel>
+        <preCheckedStatus>Never Checked</preCheckedStatus>
+        <rule>
+            <text>unnamed</text>
+            <indicator>-1</indicator>
+        </rule>
+        <sourceID>38</sourceID>
+        <destID>57</destID>
         <traversalCount>0</traversalCount>
     </edge>
     <EdgesGroups ordered="false"></EdgesGroups>
